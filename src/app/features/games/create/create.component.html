@@ -1,0 +1,33 @@
+<div class="container">
+<form [formGroup]="gameForm">
+  <div class="form-group">
+    <label for="gameName">Game-name:</label>
+    <input type="text" formControlName="gameName" >
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="lineOne">1:</label>
+    <input type="text" formControlName="lineOne">
+  </div>
+  <div class="form-group">
+    <label for="lineTwo">2:</label>
+    <input type="text" formControlName="lineTwo">
+  </div>
+  <div class="form-group">
+    <label for="lineThree">3:</label>
+    <input type="text" formControlName="lineThree">
+  </div>
+  <div class="form-group">
+    <label for="lineFour">4:</label>
+    <input type="text" formControlName="lineFour">
+  </div>
+  <div class="form-group">
+    <label for="lineFive">5:</label>
+    <input type="text" formControlName="lineFive">
+  </div>
+
+
+
+  <button type="submit" [disabled]="!gameForm.valid">Create!</button>
+</form>
+</div>

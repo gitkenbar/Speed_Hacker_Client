@@ -1,0 +1,11 @@
+.footer{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-content: flex-end;
+  background-color: #1C211F;
+  padding: 0.5rem 1rem;
+  //position: sticky;
+  //top: 0;
+  width: 100%;
+}
