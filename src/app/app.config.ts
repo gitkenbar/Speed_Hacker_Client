@@ -12,7 +12,7 @@ export function initializedUserData(
   userService:UserService,
   authService:AuthService
   ){
-    console.log("THIS executed");
+
   if(authService.isLoggedIn()){
     return () => userService.getBootstrapData().subscribe();
   }else {

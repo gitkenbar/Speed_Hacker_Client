@@ -1,1 +1,14 @@
-<p>game works!</p>
+<div class="container">
+  <div class="game-header">
+    <div class="game-header-left">
+      {{game.name}}
+      <div class="game-header-info-name">
+      </div>
+      <div class="game-header-user-name">User Id: {{game.user_id}}</div>
+      <div class="game-updated">Updated: {{game.updated_at}}</div>
+    </div>
+    <div class="game-right">
+      <a (click)="playGame(game.content_id)">Play!</a>
+    </div>
+  </div>
+</div>
