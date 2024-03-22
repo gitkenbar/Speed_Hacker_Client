@@ -1,0 +1,8 @@
+.container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+  padding-right: 7rem;
+  min-height: 90vh;
+}

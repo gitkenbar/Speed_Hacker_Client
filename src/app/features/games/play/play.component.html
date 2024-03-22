@@ -1,1 +1,14 @@
-<p>play works!</p>
+<div class="container">
+  <form [formGroup]="challengeForm">
+    @for(challenge of stringArray; track id){
+      <p>{{ challenge }}</p>
+      <div class="form-group">
+        <label for="Input"></label>
+        <input type="text" formControlName="activeInput">
+      </div>
+
+    }
+
+
+  </form>
+</div>

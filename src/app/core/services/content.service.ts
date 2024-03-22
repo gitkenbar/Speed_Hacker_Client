@@ -1,24 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environment/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContentService implements OnInit{
-  id: number = 0;
-  private sub: any;
+export class ContentService{
+
   constructor(private http:HttpClient, private route: ActivatedRoute) { }
 
-  getContents(): Observable<string[]>{
-    return this.http.get<string[]>(`${environment.apiUrl}/contents/${this.id}`)
+  getContents(id: number): Observable<any>{
+    console.log("content service: getContents(id)", id)
+    return this.http.get<any>(`${environment.apiUrl}/contents/${id}`)
   }
 
-  ngOnInit(): void {
-      this.sub = this.route.params.subscribe(params => {
-        this.id = +params['id'];
-      })
-  }
 }
