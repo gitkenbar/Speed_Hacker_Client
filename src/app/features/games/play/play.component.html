@@ -1,12 +1,14 @@
 <div class="container">
-  <form [formGroup]="challengeForm">
-    @for(challenge of stringArray; track id){
+  <form [formGroup]="responseForm">
+    @for(challenge of stringArray; track challenge; let i = $index){
       <p>{{ challenge }}</p>
       <div class="form-group">
         <label for="Input"></label>
-        <input type="text" formControlName="activeInput">
+        <input type="text" [formControlName]="i">
       </div>
-
+    }
+    @empty {
+      <p> Was there supposed something here?</p>
     }
 
 
