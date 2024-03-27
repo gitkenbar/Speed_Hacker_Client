@@ -1,16 +1,7 @@
 <div class="container">
   <form [formGroup]="responseForm">
-    @for(challenge of stringArray; track challenge; let i = $index){
-      <p>{{ challenge }}</p>
-      <div class="form-group">
-        <label for="Input"></label>
-        <input type="text" [formControlName]="i">
-      </div>
-    }
-    @empty {
-      <p> Was there supposed something here?</p>
-    }
-
-
+    <div *ngFor="let challenge of challengeArray">
+      <app-instance [challenge]="challenge" [form]="responseForm"></app-instance>
+    </div>
   </form>
 </div>
