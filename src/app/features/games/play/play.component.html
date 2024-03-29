@@ -1,7 +1,4 @@
-<div class="container">
-  <form [formGroup]="responseForm">
-    <div *ngFor="let challenge of challengeArray">
-      <app-instance [challenge]="challenge" [form]="responseForm"></app-instance>
-    </div>
-  </form>
-</div>
+@if(challenge){
+  <div class="container">
+  <app-content [challenge]="challenge" [challengeArray]="challengeArray" [form]="responseForm"></app-content>
+</div>}

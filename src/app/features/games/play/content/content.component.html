@@ -1,0 +1,7 @@
+<form [formGroup]="form">
+  @for(instance of challengeArray; track instance){
+    <div class="form-row">
+    <app-challenge [challenge]="challenge" [challengeArray]="challengeArray" [instance]="instance" [form]="form"></app-challenge>
+    </div>
+  }
+</form>

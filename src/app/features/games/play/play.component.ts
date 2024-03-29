@@ -1,54 +1,54 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ContentService } from '../../../core/services/content.service';
-import { BehaviorSubject, ObservableInput } from 'rxjs';
 import { Challenge } from '../../../shared/models/challenge';
 import { PlayService } from '../../../core/services/play.service';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { InstanceComponent } from './instance/instance.component';
 import { GameService } from '../../../core/services/game.service';
+import { Observable } from 'rxjs';
+import { ContentComponent } from './content/content.component';
 
 @Component({
   selector: 'app-play',
   standalone: true,
-  providers: [ContentService],
-  imports: [ReactiveFormsModule, CommonModule, InstanceComponent],
+  providers: [ContentService, GameService],
+  imports: [ReactiveFormsModule, AsyncPipe, CommonModule, ContentComponent],
   templateUrl: './play.component.html',
   styleUrl: './play.component.scss'
 })
 export class PlayComponent implements OnInit{
-  challengeArray: Challenge[] = []
+  @Output() challengeArray: string[] = []
   @Input("id") id: number = 0;
-  @Input() challenge: Challenge[] | null = [];
+  @Input() challenge!: Challenge;
+  @Input() challengeSub$: Observable<Challenge>
 
-  responseForm!: FormGroup;
+  @Output() responseForm!: FormGroup;
 
   constructor(
     private contentService:ContentService,
-    private playService: PlayService,
-    private formBuilder:FormBuilder,
-    private gameService: GameService){}
+    private gameService: GameService)
+    {
+      this.challengeSub$ = contentService.getContents(this.id)
+    }
 
   ngOnInit(): void{
-    this.responseForm = this.gameService.toFormGroup(this.challenge as Challenge[])
-    /* this.contentService.getContents(this.id).subscribe({
-      next: (res: Challenge[]) =>{
-        this.challengeData = res;
-        this.challengeArray = res.challenge.replaceAll('[','').replaceAll(']','').replaceAll('"','').split(',')
+    this.contentService.getContents(this.id).subscribe({
+      next: (res: any) =>{
+        this.challenge = res
+        this.challengeArray = JSON.parse(res.challenge)
+        //console.log(this.challengeArray)
+        this.responseForm = this.gameService.toFormGroup(this.challenge as Challenge)
       },
       error: (error:any) => {
         console.error('error fetching content', error);
       }
-    }) */
+    })
+
   }
 
   get response() {
     return this.responseForm.get("responseGroup") as FormArray;
-  }
-
-
-  addResponse() {
-    this.response.push(this.formBuilder.control(''))
   }
 
   inputCheck():boolean {

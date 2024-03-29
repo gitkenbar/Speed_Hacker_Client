@@ -11,7 +11,7 @@ export class ContentService{
 
   constructor(private http:HttpClient, private route: ActivatedRoute) { }
 
-  getContents(id: number): Observable<any>{
+  getContents(id: number): Observable<Challenge>{
     return this.http.get<any>(`${environment.apiUrl}/contents/${id}`)
   }
 

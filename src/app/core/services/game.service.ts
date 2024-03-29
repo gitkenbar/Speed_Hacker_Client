@@ -17,12 +17,15 @@ export class GameService {
     return this.http.get<Game[]>(`${environment.apiUrl}/games`)
   }
 
-  toFormGroup(challenge: Challenge[]){
+  toFormGroup(content: Challenge){
     const group: any = {};
-
-    challenge.forEach(challenge => {
-      group[challenge.id] = new FormControl(challenge.challenge || '')
-    })
+    //console.log(content)
+    const challengeArray: [] = JSON.parse(content.challenge)
+    //console.log(challengeArray)
+    for(let key of challengeArray){
+      group[challengeArray.indexOf(key)] = new FormControl({value:'', disabled: false})
+    }
+    //console.log(group)
 
     return new FormGroup(group)
   }
