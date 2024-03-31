@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Challenge } from '../../../../../shared/models/challenge';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-challenge',
@@ -10,31 +11,24 @@ import { Challenge } from '../../../../../shared/models/challenge';
   templateUrl: './challenge.component.html',
   styleUrl: './challenge.component.scss'
 })
-export class ChallengeComponent implements OnInit, OnChanges{
+export class ChallengeComponent implements OnInit{
   @Input() challenge!: Challenge;
   @Input() form!: FormGroup;
   @Input() instance!: string;
-  @Input() instanceResponse!: string;
+  @Input() instanceResponse!: BehaviorSubject<string>;
   @Input() challengeArray!: string[]
-  instanceIndex!:number;
+  instanceIndex!:any;
+  @Output() userInput = document.getElementsByClassName(this.instanceIndex as string)
 
-  ngOnInit(){
-  }
-
-  ngOnChanges(changes: SimpleChanges): void{
+  ngOnInit(): void{
     this.instanceIndex = this.challengeArray.indexOf(this.instance)
-    //console.log("change detected")
-    //console.log(this.instance.length)
-    //console.log(this.instanceIndex)
-    //console.log(this.form.value[this.instanceIndex].length)
-    //console.log(this.form.value[+this.instanceIndex])
-    if(this.form.controls[this.instanceIndex]?.value.maxLength){
-      console.log("input checked, disabled")
-      this.form.controls[this.instanceIndex]?.disable()
-    }
+    //this.userInput?.addEventListener("input", this.inputCheck)
+    //console.log(this.userInput)
   }
 
   inputCheck(){
+    // How do I select inputs?
+    //console.log(this.instance)
     if(this.instance.length == this.form.value[this.instanceIndex].length){
       console.log("input checked")
       this.form.get(`group${this.instanceIndex}`)?.disable()
@@ -42,10 +36,18 @@ export class ChallengeComponent implements OnInit, OnChanges{
    }
    //this.form.getRawValue()
    test(){
+    console.log("Detected Keystroke")
     if(this.instance.length == this.form.value[this.instanceIndex].length){
       console.log("input checked, disabled")
+      // need to select the next form input
+      //this.form.controls[this.instanceIndex + 1].focus()
       this.form.controls[this.instanceIndex]?.disable()
+      //if(this.form.controls[this.instanceIndex - 1].disabled && this.instanceIndex > -1){
+      //  this.userInput?.focus()
+      //}
     }
    }
+
+
 }
 

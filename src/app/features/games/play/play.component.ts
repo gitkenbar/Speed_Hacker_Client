@@ -6,8 +6,9 @@ import { PlayService } from '../../../core/services/play.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { InstanceComponent } from './instance/instance.component';
 import { GameService } from '../../../core/services/game.service';
-import { Observable } from 'rxjs';
+import { Observable, map, takeWhile, timer } from 'rxjs';
 import { ContentComponent } from './content/content.component';
+import { Game } from '../../../shared/models/game';
 
 @Component({
   selector: 'app-play',
@@ -22,8 +23,26 @@ export class PlayComponent implements OnInit{
   @Input("id") id: number = 0;
   @Input() challenge!: Challenge;
   @Input() challengeSub$: Observable<Challenge>
-
+  @Input() gameData!: Game;
   @Output() responseForm!: FormGroup;
+  gameTitle!:string;
+
+  minutes: number = 2;
+  seconds: number = 0o0;
+
+  countdown() {
+    const interval = setInterval(() => {
+      if (this.seconds > 0) {
+        this.seconds--;
+      } else if (this.minutes > 0 && this.seconds === 0) {
+        this.seconds = 59;
+        this.minutes--;
+      } else {
+        clearInterval(interval);
+        console.log("Time is Up!")
+      }
+    }, 1000);
+  }
 
   constructor(
     private contentService:ContentService,
@@ -33,6 +52,15 @@ export class PlayComponent implements OnInit{
     }
 
   ngOnInit(): void{
+    this.gameService.gameInfo(this.id).subscribe({
+      next: (res: any) =>{
+        this.gameData = res
+      },
+      error: (error:any) => {
+        console.error('error fetching game data',error);
+      }
+    });
+
     this.contentService.getContents(this.id).subscribe({
       next: (res: any) =>{
         this.challenge = res
@@ -43,8 +71,9 @@ export class PlayComponent implements OnInit{
       error: (error:any) => {
         console.error('error fetching content', error);
       }
-    })
+    });
 
+    this.countdown()
   }
 
   get response() {

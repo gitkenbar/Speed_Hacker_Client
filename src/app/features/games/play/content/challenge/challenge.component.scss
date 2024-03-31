@@ -13,6 +13,12 @@ input:focus{
   outline: none;
 }
 
+input[disabled]{
+  color: grey;
+  background-color: black;
+  border-color: red;
+}
+
 .test{
   padding: .5rem;
   border: 1px solid #53DD6C;

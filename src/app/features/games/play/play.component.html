@@ -1,4 +1,12 @@
 @if(challenge){
   <div class="container">
+    @if(gameData) {
+    <h1>{{gameData.name}}</h1>
+    }
+
+  <p>Time Remaining: {{minutes}}:
+    @if(seconds > 10){ {{seconds}}}
+    @else{0{{seconds}}}</p>
+
   <app-content [challenge]="challenge" [challengeArray]="challengeArray" [form]="responseForm"></app-content>
 </div>}

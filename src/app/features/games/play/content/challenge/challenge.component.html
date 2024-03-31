@@ -1,5 +1,5 @@
 <div [formGroup]="form">
   <label>{{instance}}</label>
-  <input type="text" [formControlName]="instanceIndex" [maxlength]="instance.length" autofocus>
+  <input type="text" [formControlName]="instanceIndex" [maxlength]="instance.length" (keyup)="test()"[size]="instance.length" autofocus [className]="instanceIndex">
   <!-- <div class="test" (click)="test()">Test {{instance}}</div> -->
 </div>

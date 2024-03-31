@@ -17,6 +17,10 @@ export class GameService {
     return this.http.get<Game[]>(`${environment.apiUrl}/games`)
   }
 
+  gameInfo(id: number): Observable<Game>{
+    return this.http.get<any>(`${environment.apiUrl}/games/${id}`)
+  }
+
   toFormGroup(content: Challenge){
     const group: any = {};
     //console.log(content)
