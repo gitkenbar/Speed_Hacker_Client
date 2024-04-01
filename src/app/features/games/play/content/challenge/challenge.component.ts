@@ -36,9 +36,9 @@ export class ChallengeComponent implements OnInit{
    }
    //this.form.getRawValue()
    test(){
-    console.log("Detected Keystroke")
+    //console.log("Detected Keystroke")
     if(this.instance.length == this.form.value[this.instanceIndex].length){
-      console.log("input checked, disabled")
+      //console.log("input checked, disabled")
       // need to select the next form input
       //this.form.controls[this.instanceIndex + 1].focus()
       this.form.controls[this.instanceIndex]?.disable()

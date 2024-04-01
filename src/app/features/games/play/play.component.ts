@@ -27,8 +27,8 @@ export class PlayComponent implements OnInit{
   @Output() responseForm!: FormGroup;
   gameTitle!:string;
 
-  minutes: number = 2;
-  seconds: number = 0o0;
+  @Output() minutes: number = 2;
+  @Output() seconds: number = 0o0;
 
   countdown() {
     const interval = setInterval(() => {

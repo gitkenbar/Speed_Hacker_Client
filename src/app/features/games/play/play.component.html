@@ -5,8 +5,8 @@
     }
 
   <p>Time Remaining: {{minutes}}:
-    @if(seconds > 10){ {{seconds}}}
+    @if(seconds > 9){ {{seconds}}}
     @else{0{{seconds}}}</p>
 
-  <app-content [challenge]="challenge" [challengeArray]="challengeArray" [form]="responseForm"></app-content>
+  <app-content [challenge]="challenge" [challengeArray]="challengeArray" [form]="responseForm" [minutes]="minutes" [seconds]="seconds"></app-content>
 </div>}
