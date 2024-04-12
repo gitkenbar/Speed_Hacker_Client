@@ -8,7 +8,7 @@ import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { UserService } from './core/services/user.service';
 import { AuthService } from './core/services/auth.service';
 
-/* export function initializedUserData(
+export function initializedUserData(
   userService:UserService,
   authService:AuthService
   ){
@@ -18,16 +18,16 @@ import { AuthService } from './core/services/auth.service';
   }else {
     return () => of(null);
   }
-} */
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
-    /* {
+    {
       provide: APP_INITIALIZER,
       useFactory: initializedUserData,
       deps: [UserService, AuthService],
       multi: true
-    }, */
+    },
     provideHttpClient(withInterceptors([authInterceptor]))],
 };
