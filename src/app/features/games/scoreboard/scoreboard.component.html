@@ -1,0 +1,20 @@
+<div class="container">
+
+  <table>
+    <tr>
+      <th>Rank</th>
+      <th>User</th>
+      <th>Score</th>
+    </tr>
+    @for(score of scoreArray; track $index){
+
+
+      <tr>
+        <td>{{$index + 1}}</td>
+        <td>{{score.user_id}}</td>
+        <td>{{score.score}}</td>
+      </tr>
+    }
+  </table>
+
+</div>

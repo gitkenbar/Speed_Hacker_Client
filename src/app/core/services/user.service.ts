@@ -16,6 +16,10 @@ export class UserService {
     this.currentUserBehaviorSubject.next(user);
   }
 
+  getUserName(userId: number) {
+    return this.http.get(`${environment.apiUrl}/users/${userId}`)
+  }
+
   getBootstrapData() {
     return this.http.get(`${environment.apiUrl}/web/bootstrap`).pipe(
       tap((res:any)=>{

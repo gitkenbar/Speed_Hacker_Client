@@ -22,7 +22,7 @@ export class PlayComponent implements OnInit{
   @Output() challengeArray: string[] = []
   @Input("id") id: number = 0;
   @Input() challenge!: Challenge;
-  @Input() challengeSub$: Observable<Challenge>
+  @Input() challengeSub$: Observable<Challenge>;
   @Input() gameData!: Game;
   @Output() responseForm!: FormGroup;
   gameTitle!:string;

@@ -8,6 +8,6 @@
     </div>
 </nav>
 <div class="sidebar" [class.active]="isSidebarVisible">
-  <a routerLink="list" routerLinkActive="active">Games</a>
-    <a routerLink="create" routerLinkActive="active">Create</a>
+  <a routerLink="list" routerLinkActive="active" (click)="toggleSidebar()">Games</a>
+    <a routerLink="create" routerLinkActive="active" (click)="toggleSidebar()">Create</a>
 </div>

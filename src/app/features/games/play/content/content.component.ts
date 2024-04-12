@@ -5,6 +5,8 @@ import { ChallengeComponent } from './challenge/challenge.component';
 import { CommonModule } from '@angular/common';
 import { GameService } from '../../../../core/services/game.service';
 import { ScoringService } from '../../../../core/services/scoring.service';
+import { Router } from '@angular/router';
+import { Game } from '../../../../shared/models/game';
 
 @Component({
   selector: 'app-content',
@@ -20,11 +22,13 @@ export class ContentComponent implements OnInit{
   @Input() form!: FormGroup;
   @Input() minutes!: number;
   @Input() seconds!: number;
+  @Input() gameData!: Game;
   payLoad = '';
 
   constructor(
     private gameService: GameService,
-    private scoreService: ScoringService){}
+    private scoreService: ScoringService,
+    private router: Router){}
 
   score(){
     let responseString: string = Object.values(this.form.value).toString()
@@ -32,6 +36,7 @@ export class ContentComponent implements OnInit{
     //let stringifiedUserInput = responseFormArray.toString()
     //console.log(Object.values(this.form.value))
     this.scoreService.scoreIt(challengeString, responseString, this.timeRemaining)
+    this.router.navigate([`/scores/${this.gameData.id}`])
   }
 
   ngOnInit() {

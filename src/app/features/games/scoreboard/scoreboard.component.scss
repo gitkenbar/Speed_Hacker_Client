@@ -1,0 +1,22 @@
+
+table {
+  border-collapse: collapse;
+  align-content: center;
+  border: 1px solid #53DD6C;
+}
+
+td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #1C211F;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 44px);
+  align-items: center;
+}
