@@ -3,6 +3,8 @@ import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@ang
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Challenge } from '../../../../../shared/models/challenge';
 import { BehaviorSubject } from 'rxjs';
+import anime from 'animejs/lib/anime.es.js';
+import { ContentComponent } from '../content.component';
 
 @Component({
   selector: 'app-challenge',
@@ -12,6 +14,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrl: './challenge.component.scss'
 })
 export class ChallengeComponent implements OnInit{
+
   @Input() challenge!: Challenge;
   @Input() form!: FormGroup;
   @Input() instance!: string;
@@ -20,6 +23,10 @@ export class ChallengeComponent implements OnInit{
   instanceIndex!:any;
   @Output() userInput = document.getElementsByClassName(this.instanceIndex as string)
 
+  challengeInstance = document.getElementsByClassName("grid-container")!
+  userResponse!:string;
+
+  constructor(private contentComponent: ContentComponent){}
   ngOnInit(): void{
     this.instanceIndex = this.challengeArray.indexOf(this.instance)
     //this.userInput?.addEventListener("input", this.inputCheck)
@@ -37,17 +44,17 @@ export class ChallengeComponent implements OnInit{
    //this.form.getRawValue()
    test(){
     //console.log("Detected Keystroke")
+    //console.log(this.form.value[this.instanceIndex])
+    this.userResponse = this.form.value[this.instanceIndex]
+
+    this.form.value[this.instanceIndex]
     if(this.instance.length == this.form.value[this.instanceIndex].length){
-      //console.log("input checked, disabled")
-      // need to select the next form input
-      //this.form.controls[this.instanceIndex + 1].focus()
       this.form.controls[this.instanceIndex]?.disable()
-      //if(this.form.controls[this.instanceIndex - 1].disabled && this.instanceIndex > -1){
-      //  this.userInput?.focus()
-      //}
-    }
-   }
-
-
+      document.getElementById(`${this.instanceIndex + 1}`)?.focus()
+      if(this.form.disabled){
+        this.contentComponent.score()
+      }
+      }
+  }
 }
 

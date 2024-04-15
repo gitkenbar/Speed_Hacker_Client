@@ -7,6 +7,8 @@ import { GameService } from '../../../../core/services/game.service';
 import { ScoringService } from '../../../../core/services/scoring.service';
 import { Router } from '@angular/router';
 import { Game } from '../../../../shared/models/game';
+import { UserService } from '../../../../core/services/user.service';
+import { User } from '../../../../shared/models/user';
 
 @Component({
   selector: 'app-content',
@@ -23,23 +25,29 @@ export class ContentComponent implements OnInit{
   @Input() minutes!: number;
   @Input() seconds!: number;
   @Input() gameData!: Game;
-  payLoad = '';
+  currentUser: User | null = null;
+  userInput!: string;
 
   constructor(
     private gameService: GameService,
     private scoreService: ScoringService,
-    private router: Router){}
+    private router: Router,
+    private userService: UserService){}
 
   score(){
     let responseString: string = Object.values(this.form.value).toString()
     let challengeString: string = this.challengeArray.toString()
-    //let stringifiedUserInput = responseFormArray.toString()
-    //console.log(Object.values(this.form.value))
-    this.scoreService.scoreIt(challengeString, responseString, this.timeRemaining)
-    this.router.navigate([`/scores/${this.gameData.id}`])
+    if(this.currentUser){
+      this.scoreService.scoreIt(this.currentUser.id, this.gameData.id, challengeString, responseString, this.timeRemaining)
+    }
+
+    //this.router.navigate([`/scores/${this.gameData.id}`])
   }
 
   ngOnInit() {
+    this.userService.currentUserBehaviorSubject.subscribe((user)=>{
+      this.currentUser = user;
+    })
     //this.form = this.gameService.toFormGroup(this.challenge as Challenge);
   }
 

@@ -2,7 +2,6 @@
   <div class="brand-name"><h3 routerLink="" routerLinkActive="active">Speed Hacker</h3></div>
   <div class="nav-links">
     @if (isLoggedIn()){
-      <span>Welcome, {{currentUser?.username}}</span>
       <a (click)="logout()">Logout</a>}
       @else{
         <a routerLink="/login">Login</a>

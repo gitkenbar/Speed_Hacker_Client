@@ -27,3 +27,27 @@ input[disabled]{
   color: #53DD6C;
   background-color: #2B2B2B;
 }
+
+.challenge{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.grid-container {
+  display: inline-grid;
+  grid-template-columns: max-content max-content;
+}
+
+.chunk{
+  display: flex;
+  background-color: #1C211F;
+  padding: 1vh;
+  margin: 2vh;
+  border: 1px solid #53DD6C;
+  border-radius: 5px;
+  box-shadow: 2px 2px;
+}
+
+a{
+  display: block;
+}

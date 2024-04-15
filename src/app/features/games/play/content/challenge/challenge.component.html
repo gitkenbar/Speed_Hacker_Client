@@ -1,5 +1,26 @@
-<div [formGroup]="form">
-  <label>{{instance}}</label>
-  <input type="text" [formControlName]="instanceIndex" [maxlength]="instance.length" (keyup)="test()"[size]="instance.length" autofocus [className]="instanceIndex">
-  <!-- <div class="test" (click)="test()">Test {{instance}}</div> -->
+<div [formGroup]="form" class="grid-container">
+  <div class="challenge chunk">
+    <!-- @if(!this.form.value[this.instanceIndex]){} -->
+      {{instance}}
+
+
+    <!--  <a class="textAnimation">
+      {{userResponse}}
+    </a> -->
+
+
+  </div>
+
+  <div class="challenge chunk">
+    <input type="text"
+    [formControlName]="instanceIndex"
+    [maxlength]="instance.length"
+    (keyup)="test()"
+    [size]="instance.length"
+    autocomplete="off"
+    autofocus
+    required
+    [id]="instanceIndex">
+
+  </div>
 </div>

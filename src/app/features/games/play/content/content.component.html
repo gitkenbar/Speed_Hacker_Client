@@ -1,10 +1,7 @@
 <form [formGroup]="form">
-  @for(instance of challengeArray; track instance){
+  @for(instance of challengeArray; track $index){
     <div class="form-row">
     <app-challenge [challenge]="challenge" [challengeArray]="challengeArray" [instance]="instance" [form]="form" ></app-challenge>
     </div>
   }
-  <div class="test">
-    <a (click)="score()">Score</a>
-  </div>
 </form>

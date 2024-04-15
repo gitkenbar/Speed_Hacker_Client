@@ -1,14 +1,15 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ContentService } from '../../../core/services/content.service';
 import { Challenge } from '../../../shared/models/challenge';
 import { PlayService } from '../../../core/services/play.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { InstanceComponent } from './instance/instance.component';
 import { GameService } from '../../../core/services/game.service';
 import { Observable, map, takeWhile, timer } from 'rxjs';
 import { ContentComponent } from './content/content.component';
 import { Game } from '../../../shared/models/game';
+import { Router } from '@angular/router';
+import { ScoringService } from '../../../core/services/scoring.service';
 
 @Component({
   selector: 'app-play',
@@ -19,6 +20,7 @@ import { Game } from '../../../shared/models/game';
   styleUrl: './play.component.scss'
 })
 export class PlayComponent implements OnInit{
+  @ViewChild(ContentComponent) contentCompent!:ContentComponent;
   @Output() challengeArray: string[] = []
   @Input("id") id: number = 0;
   @Input() challenge!: Challenge;
@@ -40,13 +42,17 @@ export class PlayComponent implements OnInit{
       } else {
         clearInterval(interval);
         console.log("Time is Up!")
+        this.contentCompent.score()
+        this.router.navigate([`/scores/${this.id}`])
       }
     }, 1000);
   }
 
   constructor(
     private contentService:ContentService,
-    private gameService: GameService)
+    private gameService: GameService,
+    private router: Router,
+    private scoringservice: ScoringService)
     {
       this.challengeSub$ = contentService.getContents(this.id)
     }
@@ -84,4 +90,5 @@ export class PlayComponent implements OnInit{
     //compare input.length to challenge.length, when input reaches maximum characters, the input disables and the cursor moves to the next challenge automatically
     return true
   }
+
 }

@@ -1,12 +1,28 @@
 @if(challenge){
-  <div class="container">
-    @if(gameData) {
-    <h1>{{gameData.name}}</h1>
-    }
+  <div class="base">
+  <div class="header">
+    <div class="chunk title">
 
-  <p>Time Remaining: {{minutes}}:
-    @if(seconds > 9){ {{seconds}}}
-    @else{0{{seconds}}}</p>
+      @if(gameData) {
+        <h1>{{gameData.name}}</h1>
+      }
+    </div>
+    <div class="chunk timer">
+      <h3>Time:
+      {{minutes}}
+        @if(seconds > 9){ :{{seconds}}}
+        @else{:0{{seconds}}}</h3>
 
-  <app-content [challenge]="challenge" [challengeArray]="challengeArray" [form]="responseForm" [minutes]="minutes" [seconds]="seconds"[gameData]="gameData"></app-content>
+    </div>
+  </div>
+    <div>
+      <app-content
+      [challenge]="challenge"
+      [challengeArray]="challengeArray"
+      [form]="responseForm"
+      [minutes]="minutes"
+      [seconds]="seconds"
+      [gameData]="gameData"></app-content>
+
+    </div>
 </div>}
