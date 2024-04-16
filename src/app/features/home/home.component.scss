@@ -34,3 +34,8 @@ a:hover{
   background-color: #53DD6C;
   text-decoration: none;
 }
+
+.row{
+  display: grid;
+  grid-template-columns: 43vw 43vw;
+}

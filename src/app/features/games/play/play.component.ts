@@ -31,16 +31,17 @@ export class PlayComponent implements OnInit{
 
   @Output() minutes: number = 2;
   @Output() seconds: number = 0o0;
+  interval!: any;
 
   countdown() {
-    const interval = setInterval(() => {
+    this.interval = setInterval(() => {
       if (this.seconds > 0) {
         this.seconds--;
       } else if (this.minutes > 0 && this.seconds === 0) {
         this.seconds = 59;
         this.minutes--;
       } else {
-        clearInterval(interval);
+        clearInterval(this.interval);
         console.log("Time is Up!")
         this.contentCompent.score()
         this.router.navigate([`/scores/${this.id}`])

@@ -5,7 +5,17 @@
       <a routerLink="list" routerLinkActive="active">Games</a>
       <a routerLink="create" routerLinkActive="active">Create</a>
     </div>
-    <div class="chunk col">
+    <div class="chunk">
+      @if(games){
+        @for (game of games; track game.id){
+          <app-game [game]="game"></app-game>
+        }
+      }
+      @else{
+        <p>Nothing to find.</p>
+        <p>Create a game!</p>
+      }
+
 
     </div>
   </div>

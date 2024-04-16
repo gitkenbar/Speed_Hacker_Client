@@ -3,45 +3,59 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environment/environment';
 import { Score } from '../../shared/models/score';
 import { Router } from '@angular/router';
+import { ScoreboardComponent } from '../../features/games/scoreboard/scoreboard.component';
+import { ScoreCard } from '../../shared/models/scorecard';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScoringService {
-
-  multiplier: number = 1;
+  scoreCard!: ScoreCard;
   score: number = 0
-
+  userScore!: number;
+  highestMultiplier!: number;
+  correctKeystrokes: number = 0;
   constructor(
     private http: HttpClient,
     private router: Router
   ) { }
 
   scoreIt(userId: number, gameId: number, stringifiedChallenge: string, formValue: string, timeRemaining: number) {
-    console.log("Score It Service Works!")
+    let multiplier = 1
+    let highestMultiplier = 1
+    let correctKeystrokes = 0
     for(let challenge of stringifiedChallenge){
       let challengeIndex:number = stringifiedChallenge.indexOf(challenge)
       let response = formValue.charAt(challengeIndex)
       if(challenge == response){
-        this.score = this.score + this.multiplier
-        this.multiplier++
+        this.score = this.score + multiplier
+        correctKeystrokes++
+        multiplier++
+        if(multiplier > highestMultiplier){
+          console.log("If statement works!")
+          highestMultiplier++
+        }
+        console.log(highestMultiplier)
+        console.log(multiplier)
       }else {
-        this.multiplier = 1
+        multiplier = 1
       }
     }
-    let bonus:number = timeRemaining * this.multiplier
+    let bonus:number = timeRemaining * multiplier
     let total: number = this.score + bonus
-    console.log(total)
-
+    this.scoreCard = new ScoreCard(highestMultiplier, correctKeystrokes, stringifiedChallenge.length, timeRemaining, total);
     this.postIt(userId, gameId, total)
+    this.userScore = total
+    this.score = 0
+
   }
 
   postIt(userId: number, gameId: number, total: number) {
-    console.log("Trying to post it")
     let newScore: any = {game_id: gameId, user_id: userId, score: total}
 
     return this.http.post<any>(`${environment.apiUrl}/scores/`, newScore).subscribe({
       next: (res:any) =>{
+        console.log(res.score)
         this.router.navigate([`/scores/${gameId}`])
       },
       error: (error:any) => {
@@ -49,5 +63,9 @@ export class ScoringService {
         //this.isError = true
       }
   })
+  }
+
+  getScorecard(): ScoreCard{
+    return this.scoreCard
   }
 }

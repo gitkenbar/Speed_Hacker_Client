@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Game } from '../../../../shared/models/game';
 import { UserService } from '../../../../core/services/user.service';
 import { User } from '../../../../shared/models/user';
+import { PlayComponent } from '../play.component';
 
 @Component({
   selector: 'app-content',
@@ -32,14 +33,21 @@ export class ContentComponent implements OnInit{
     private gameService: GameService,
     private scoreService: ScoringService,
     private router: Router,
-    private userService: UserService){}
+    private userService: UserService,
+    private playComponent: PlayComponent){}
 
   score(){
     let responseString: string = Object.values(this.form.value).toString()
     let challengeString: string = this.challengeArray.toString()
     if(this.currentUser){
-      this.scoreService.scoreIt(this.currentUser.id, this.gameData.id, challengeString, responseString, this.timeRemaining)
+      this.scoreService.scoreIt(
+        this.currentUser.id,
+        this.gameData.id,
+        challengeString,
+        responseString,
+        this.timeRemaining)
     }
+    clearInterval(this.playComponent.interval)
 
     //this.router.navigate([`/scores/${this.gameData.id}`])
   }

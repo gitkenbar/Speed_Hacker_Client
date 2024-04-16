@@ -7,6 +7,13 @@
   max-width: 10%;
 }
 
+.formContainer{
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content:center;
+  justify-content:center;
+}
+
 .chunk{
   display: flex;
   background-color: #1C211F;

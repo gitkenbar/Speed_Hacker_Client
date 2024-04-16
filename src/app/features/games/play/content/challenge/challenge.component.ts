@@ -14,7 +14,6 @@ import { ContentComponent } from '../content.component';
   styleUrl: './challenge.component.scss'
 })
 export class ChallengeComponent implements OnInit{
-
   @Input() challenge!: Challenge;
   @Input() form!: FormGroup;
   @Input() instance!: string;
@@ -43,8 +42,6 @@ export class ChallengeComponent implements OnInit{
    }
    //this.form.getRawValue()
    test(){
-    //console.log("Detected Keystroke")
-    //console.log(this.form.value[this.instanceIndex])
     this.userResponse = this.form.value[this.instanceIndex]
 
     this.form.value[this.instanceIndex]

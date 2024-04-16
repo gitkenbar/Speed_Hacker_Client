@@ -3,21 +3,31 @@ import { ScoreboardService } from '../../../core/services/scoreboard.service';
 import { Score } from '../../../shared/models/score';
 import anime from 'animejs';
 import { UserService } from '../../../core/services/user.service';
+import { Router, RouterModule } from '@angular/router';
+import { ScoringService } from '../../../core/services/scoring.service';
+import { ScoreCard } from '../../../shared/models/scorecard';
+import { GameService } from '../../../core/services/game.service';
+import { Game } from '../../../shared/models/game';
 
 @Component({
   selector: 'app-scoreboard',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './scoreboard.component.html',
   styleUrl: './scoreboard.component.scss'
 })
 export class ScoreboardComponent implements OnInit{
   @Input("game_id")game_id: number = 0;
+  scorecard!: ScoreCard;
   scoreArray!: Score[];
+  gameData!: Game;
 
   constructor(
     private scoreService: ScoreboardService,
-    private userService: UserService){}
+    private scoringService: ScoringService,
+    private userService: UserService,
+    private router: Router,
+    private gameService: GameService){}
 
   ngOnInit(): void {
     this.scoreService.getScores(this.game_id).subscribe({
@@ -26,5 +36,18 @@ export class ScoreboardComponent implements OnInit{
         this.scoreArray = res
       }
     })
+    this.scorecard = this.scoringService.getScorecard()
+    this.gameService.gameInfo(this.game_id).subscribe({
+      next: (res: any) =>{
+        this.gameData = res
+      },
+      error: (error:any) => {
+        console.error('error fetching game data',error);
+      }
+    });
+  }
+
+  tryAgain(){
+    this.router.navigate([`play/${this.game_id}`])
   }
 }

@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { User } from '../../models/user';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserService } from '../../../core/services/user.service';
+import { KatakanaService } from '../../../core/services/katakana.service';
 
 @Component({
   selector: 'app-nav',
@@ -18,13 +19,15 @@ export class NavComponent implements OnInit{
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private katakana: KatakanaService
     ){}
 
   ngOnInit(): void {
     this.userService.currentUserBehaviorSubject.subscribe((user)=>{
       this.currentUser = user;
     })
+    this.katakana.katakanaIt(document.querySelector('.title')?.innerHTML);
   }
 
   isLoggedIn(){

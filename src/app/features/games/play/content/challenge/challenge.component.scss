@@ -29,17 +29,24 @@ input[disabled]{
 }
 
 .challenge{
-  align-items: center;
+  max-width: 50%;
+  align-self: flex-end;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.response{
+  width: max-content;
+  align-self: flex-end;
+  display: flex;
+  justify-content:center;
 }
 .grid-container {
-  display: inline-grid;
-  grid-template-columns: max-content max-content;
 }
 
 .chunk{
-  display: flex;
+  display: block;
+  width: max-content;
   background-color: #1C211F;
   padding: 1vh;
   margin: 2vh;
