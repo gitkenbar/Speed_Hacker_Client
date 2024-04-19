@@ -16,4 +16,11 @@ export class ScoreboardService {
   getScores(game_id: number): Observable<Score[]>{
     return this.http.get<Score[]>(`${environment.apiUrl}/scores/${game_id}`)
   }
+
+  userScores(user_id: number): Observable<Score[]>{
+    return this.http.get<Score[]>(`${environment.apiUrl}/users/${user_id}/userscores`)
+  }
+  homeScores(user_id: number): Observable<Score[]>{
+    return this.http.get<Score[]>(`${environment.apiUrl}/users/${user_id}/homescores`)
+  }
 }
