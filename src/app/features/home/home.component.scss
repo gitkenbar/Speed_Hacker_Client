@@ -1,11 +1,12 @@
 .base{
-  padding: 3% 7% 0;
+  padding: 8px 7% 0;
   color: #53DD6C;
   background-color: #0A090C;
 }
 
 .chunk{
   display: flex;
+  flex-direction: column;
   background-color: #1C211F;
   padding: 1vh;
   margin: 1vh;
@@ -17,6 +18,7 @@
 
 .title{
   justify-content: center;
+  align-items: center;
 }
 
 a{
@@ -25,7 +27,10 @@ a{
   padding: 10px;
   border: 1px solid #53DD6C;
   color: #53DD6C;
+
+  background-color: #0A090C;
   text-decoration: none;
+  border-radius: 4px;
 }
 a:hover{
   display: block;

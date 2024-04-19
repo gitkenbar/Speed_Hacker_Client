@@ -32,11 +32,8 @@ export class ScoringService {
         correctKeystrokes++
         multiplier++
         if(multiplier > highestMultiplier){
-          console.log("If statement works!")
           highestMultiplier++
         }
-        console.log(highestMultiplier)
-        console.log(multiplier)
       }else {
         multiplier = 1
       }

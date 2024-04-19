@@ -45,9 +45,21 @@ export class ScoreboardComponent implements OnInit{
         console.error('error fetching game data',error);
       }
     });
+    this.animateNumber('newScore')
   }
 
   tryAgain(){
     this.router.navigate([`play/${this.game_id}`])
+  }
+
+  animateNumber(target: any) {
+    let totalScore = document.getElementById(target);
+
+    anime({
+      targets: totalScore,
+      innerHTML: [0, this.scorecard.totalScore],
+      easing: 'linear',
+      round: 10 // Will round the animated value to 1 decimal
+    });
   }
 }

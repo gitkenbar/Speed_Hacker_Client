@@ -1,13 +1,18 @@
-<div class="container">
-  <div class="game-header chunk">
-    <div class="game-header-left">
+<div class="entry">
+  <div class="header">
+    <div class="header-left">
       {{game.name}}
-      <div class="game-header-info-name">
+      <div class="header-info-name">
       </div>
-      <div class="game-header-user-name">User Id: {{game.user_id}}</div>
-      <div class="game-updated">Updated: {{game.updated_at}}</div>
+      @if(userInfo){<div class="header-user-name">Created by: {{userInfo.username}}</div>}
+      <p>Content Id: {{game.content_id}}</p>
+      <div class="updated">Updated: {{game.updated_at}}</div>
     </div>
-    <div class="game-right">
+    <div class="right">
+      @if(userInfo.id == currentUser?.id){
+        <a class="deleteEntry">Delete</a>
+      }
+      <a (click)="viewScores(game.content_id)">Scores</a>
       <a (click)="playGame(game.content_id)">Play!</a>
     </div>
   </div>

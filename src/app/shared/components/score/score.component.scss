@@ -1,0 +1,40 @@
+a{
+  margin: 1vh;
+  display: block;
+  padding: 10px;
+  border: 1px solid #53DD6C;
+  color: #53DD6C;
+  text-decoration: none;
+  border-radius: 4px;
+}
+a:hover{
+  display: block;
+  padding: 10px;
+  color: #0A090C;
+  background-color: #53DD6C;
+  text-decoration: none;
+}
+.score-right a{
+  display: block;
+  padding: 10px;
+  border: 1px solid #53DD6C;
+  color: #53DD6C;
+  text-decoration: none;
+}
+
+.entry{
+  margin: 2vh;
+  min-width: 300px;
+  max-width: 650px;
+  align-items: center;
+}
+
+.chunk{
+  display: block;
+  background-color: #1C211F;
+  padding: 1vh;
+  margin: 1vh;
+  border: 1px solid #53DD6C;
+  border-radius: 5px;
+  box-shadow: 2px 2px;
+}

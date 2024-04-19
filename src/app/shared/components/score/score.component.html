@@ -1,0 +1,12 @@
+<div class="entry">
+  <div class="header">
+    <div class="header-left">
+      @if(gameInfo){<p>{{gameInfo.name}}</p>}
+      <p>Score:{{score.score}}</p>
+
+    </div>
+    <div class="right">
+      <a (click)="playGame()">Do Better!</a>
+    </div>
+  </div>
+</div>

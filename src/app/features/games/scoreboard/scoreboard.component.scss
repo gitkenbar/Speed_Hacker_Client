@@ -28,9 +28,11 @@
 
 
 a{
+
   margin: 5px;
   display: block;
   padding: 10px;
+  border-radius: 4px;
   border: 1px solid #53DD6C;
   color: #53DD6C;
   text-decoration: none;
@@ -44,6 +46,7 @@ a:hover{
 }
 
 table {
+  margin: 1vw;
   grid-area: 1 / 1 / span 1 / span 2;
   border-collapse: collapse;
   align-content: center;

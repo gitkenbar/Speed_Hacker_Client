@@ -7,5 +7,15 @@
   min-height: 90vh;
   color: #53DD6C;
   background-color: #0A090C;
-  }
+}
 
+.chunk{
+  width: max-content;
+  background-color: #1C211F;
+  padding: 1vh;
+  margin: 1vh;
+  border: 1px solid #53DD6C;
+  border-radius: 5px;
+  box-shadow: 2px 2px;
+  justify-content: space-around;
+}

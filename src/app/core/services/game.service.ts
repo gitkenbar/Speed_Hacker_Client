@@ -21,6 +21,14 @@ export class GameService {
     return this.http.get<Game[]>(`${environment.apiUrl}/users/${id}/usergames/`)
   }
 
+  homeGames(id: number): Observable<Game[]>{
+    return this.http.get<Game[]>(`${environment.apiUrl}/users/${id}/homegames/`)
+  }
+
+  deleteGame(id: number): Observable<any>{
+    return this.http.delete<Game>(`${environment.apiUrl}/games/${id}`)
+  }
+
   gameInfo(id: number): Observable<Game>{
     return this.http.get<any>(`${environment.apiUrl}/games/${id}`)
   }

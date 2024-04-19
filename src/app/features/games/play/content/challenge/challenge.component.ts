@@ -20,23 +20,23 @@ export class ChallengeComponent implements OnInit{
   @Input() instanceResponse!: BehaviorSubject<string>;
   @Input() challengeArray!: string[]
   instanceIndex!:any;
+  challengeName!:any;
   @Output() userInput = document.getElementsByClassName(this.instanceIndex as string)
 
-  challengeInstance = document.getElementsByClassName("grid-container")!
+  challengeInstance!: HTMLElement| null
   userResponse!:string;
 
   constructor(private contentComponent: ContentComponent){}
   ngOnInit(): void{
     this.instanceIndex = this.challengeArray.indexOf(this.instance)
+    this.challengeName = `challenge-${this.instanceIndex}`
+    this.challengeInstance = document.getElementById(this.challengeName)
     //this.userInput?.addEventListener("input", this.inputCheck)
     //console.log(this.userInput)
   }
 
   inputCheck(){
-    // How do I select inputs?
-    //console.log(this.instance)
     if(this.instance.length == this.form.value[this.instanceIndex].length){
-      console.log("input checked")
       this.form.get(`group${this.instanceIndex}`)?.disable()
     }
    }
@@ -48,6 +48,8 @@ export class ChallengeComponent implements OnInit{
     if(this.instance.length == this.form.value[this.instanceIndex].length){
       this.form.controls[this.instanceIndex]?.disable()
       document.getElementById(`${this.instanceIndex + 1}`)?.focus()
+
+
       if(this.form.disabled){
         this.contentComponent.score()
       }

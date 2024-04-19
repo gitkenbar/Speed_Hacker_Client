@@ -1,11 +1,12 @@
-.container{
-  margin: 2vh;
+.entry{
+  margin: 1vh;
   min-width: 300px;
   max-width: 650px;
   align-items: center;
+  border: 1px solid #53DD6C;
 }
 
-.game-header{
+.header{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,34 +14,43 @@
   background-color: #0A090C;
   border-bottom: 1px solid #2B2B2B;
 }
-.game-header-left img{
+.header-left img{
   width: 50px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 10px;
 }
 
-.game-header-info-name{
+.header-info-name{
   font-size: 1rem;
   font-weight: bold;
   color: #333;
 }
 
-.game-content{
+.content{
   padding: 15px;
   font-family: 'Open Sans';
   line-height: 1.6;
   color: #333;
 }
 
-.game-right a{
+.deleteEntry{
+  background-color: red;
+  border: 1px solid #0A090C;
+  color:#0A090C;
+}
+
+
+
+.right a{
   display: block;
   padding: 10px;
   border: 1px solid #53DD6C;
   color: #53DD6C;
+  background-color: #0A090C;
   text-decoration: none;
 }
-.game-right a:hover{
+.right a:hover{
   display: block;
   padding: 10px;
   color: #0A090C;

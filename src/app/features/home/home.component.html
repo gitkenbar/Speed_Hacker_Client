@@ -1,11 +1,12 @@
 <div class="base">
-  <div class="chunk title"><h3>{{currentUser?.username}}'s Home </h3></div>
   <div class="row">
+    <div class="chunk title"><h1>{{currentUser?.username}}'s Home </h1></div>
     <div class="chunk col">
-      <a routerLink="list" routerLinkActive="active">Games</a>
-      <a routerLink="create" routerLinkActive="active">Create</a>
+      <a routerLink="list" routerLinkActive="active">Browse Games</a>
+      <a routerLink="create" routerLinkActive="active">Create a Game</a>
     </div>
     <div class="chunk">
+      <h3>{{currentUser?.username}}'s Games:</h3>
       @if(games){
         @for (game of games; track game.id){
           <app-game [game]="game"></app-game>
@@ -15,8 +16,18 @@
         <p>Nothing to find.</p>
         <p>Create a game!</p>
       }
-
-
+    </div>
+    <div class="chunk">
+      <h3>{{currentUser?.username}}'s Scores:</h3>
+      @if(userScores){
+        @for (score of userScores; track $index){
+            <app-score [score]="score"></app-score>
+        }
+      }
+      @else{
+        <p>Nothing to find.</p>
+        <p>Create a game!</p>
+      }
     </div>
   </div>
 </div>
