@@ -9,7 +9,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Injectable()
 export class ContentService{
 
-  constructor(private http:HttpClient, private route: ActivatedRoute) { }
+  constructor(
+    private http:HttpClient,
+    private route: ActivatedRoute
+  ) { }
+
+  createContent(content: any): Observable<any>{
+    return this.http.post<any>(`${environment.apiUrl}/contents/`, content)
+  }
 
   getContents(id: number): Observable<Challenge>{
     return this.http.get<any>(`${environment.apiUrl}/contents/${id}`)

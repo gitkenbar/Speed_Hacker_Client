@@ -15,36 +15,46 @@ export class ScoringService {
   userScore!: number;
   highestMultiplier!: number;
   correctKeystrokes: number = 0;
+
   constructor(
     private http: HttpClient,
     private router: Router
   ) { }
 
   scoreIt(userId: number, gameId: number, stringifiedChallenge: string, formValue: string, timeRemaining: number) {
+    // SCORECARD VARIABLES
     let multiplier = 1
     let highestMultiplier = 1
     let correctKeystrokes = 0
+
     for(let challenge of stringifiedChallenge){
+      // This takes each character from the user input and compares it to the target
       let challengeIndex:number = stringifiedChallenge.indexOf(challenge)
       let response = formValue.charAt(challengeIndex)
       if(challenge == response){
+        // If the character matches, add to the score, and upgrade the multiplier
         this.score = this.score + multiplier
         correctKeystrokes++
         multiplier++
         if(multiplier > highestMultiplier){
+          // This updates the highest multiplier for the scorecard
           highestMultiplier++
         }
       }else {
+        //Resets multiplier if it's incorrect
         multiplier = 1
       }
     }
-    let bonus:number = timeRemaining * multiplier
+    let bonus: number = timeRemaining * multiplier
     let total: number = this.score + bonus
+
+    // Create the scorecard
     this.scoreCard = new ScoreCard(highestMultiplier, correctKeystrokes, stringifiedChallenge.length, timeRemaining, total);
+
+    // Posts the score on the score board
     this.postIt(userId, gameId, total)
     this.userScore = total
     this.score = 0
-
   }
 
   postIt(userId: number, gameId: number, total: number) {
@@ -52,7 +62,6 @@ export class ScoringService {
 
     return this.http.post<any>(`${environment.apiUrl}/scores/`, newScore).subscribe({
       next: (res:any) =>{
-        console.log(res.score)
         this.router.navigate([`/scores/${gameId}`])
       },
       error: (error:any) => {

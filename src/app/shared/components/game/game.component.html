@@ -9,9 +9,11 @@
       <div class="updated">Updated: {{game.updated_at}}</div>
     </div>
     <div class="right">
-      @if(userInfo.id == currentUser?.id){
-        <a class="deleteEntry">Delete</a>
-      }
+      <!--
+        @if(userInfo.id == currentUser.id){
+          <a class="deleteEntry">Delete</a>
+        }
+       -->
       <a (click)="viewScores(game.content_id)">Scores</a>
       <a (click)="playGame(game.content_id)">Play!</a>
     </div>

@@ -15,6 +15,8 @@ export class AuthService {
     private router:Router,
     private userService: UserService) { }
 
+
+  // USER STATE CHANGE
   login(username:string, password:string){
     return this.http.post<{token:string}>(`${environment.apiUrl}/login`,
     {
@@ -30,6 +32,13 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/users`, data);
   }
 
+  logout(){
+    localStorage.removeItem('token')
+    this.router.navigate(['/login'])
+  }
+
+  // TOKENS
+
   setToken(token:string){
     localStorage.setItem('token', token)
   }
@@ -42,10 +51,6 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  logout(){
-    localStorage.removeItem('token')
-    this.router.navigate(['/login'])
-  }
 
   public handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'Incorrect Username or Password';  //'An unknown error occured!';

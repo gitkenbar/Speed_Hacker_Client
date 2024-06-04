@@ -29,10 +29,8 @@ export class GameComponent implements OnInit{
       this.currentUser = user;
     })
     if(this.game){
-      console.log(this.game.user_id)
       this.userService.getUserInfo(this.game.user_id).subscribe({
         next: (user: any) =>{
-          console.log(user)
           this.userInfo = user
         },
         error: (error:any) => {

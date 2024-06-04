@@ -1,5 +1,5 @@
 <div class="container">
-<form [formGroup]="gameForm">
+<form [formGroup]="gameForm" (ngSubmit)="submit()">
   <div class="form-group">
     <label for="gameName">Game-name:</label>
     <input type="text" formControlName="gameName" >
@@ -28,6 +28,6 @@
 
 
 
-  <button type="submit" [disabled]="!gameForm.valid">Create!</button>
+  <button [disabled]="!gameForm.valid">Create!</button>
 </form>
 </div>

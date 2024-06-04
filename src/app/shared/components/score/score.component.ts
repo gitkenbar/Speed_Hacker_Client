@@ -22,7 +22,6 @@ export class ScoreComponent implements OnInit{
   ngOnInit(): void {
     this.gameService.gameInfo(this.score.game_id).subscribe({
       next: (game: Game) =>{
-        console.log(game)
         this.gameInfo = game
       },
       error: (error:any) => {

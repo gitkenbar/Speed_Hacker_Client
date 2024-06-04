@@ -13,6 +13,10 @@ export class GameService {
 
   constructor(private http:HttpClient) { }
 
+  makeGame(newGame: Game){
+    return this.http.post<Game>(`${environment.apiUrl}/games`, newGame)
+  }
+
   getGames(): Observable<Game[]>{
     return this.http.get<Game[]>(`${environment.apiUrl}/games`)
   }

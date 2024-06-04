@@ -4,12 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class KatakanaService {
+
+  // Character Bank
   katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
   latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   nums = '0123456789';
   symbols = '!@#$%^&*()-=[];<>?/'
   mixMatrix = this.katakana + this.latin + this.nums + this.symbols
 
+  // Functions
   katakanaIt(animated: string | undefined){
     console.log(animated)
 
