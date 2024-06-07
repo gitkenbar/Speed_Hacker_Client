@@ -13,8 +13,9 @@ export class KatakanaService {
   mixMatrix = this.katakana + this.latin + this.nums + this.symbols
 
   // Functions
-  katakanaIt(animated: string | undefined){
+  katakanaIt(animated: string | undefined, speed: number){
     console.log(animated)
+    console.log(speed)
 
 
     //this function will pull apart a string

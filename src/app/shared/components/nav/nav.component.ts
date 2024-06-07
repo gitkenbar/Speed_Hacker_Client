@@ -27,7 +27,7 @@ export class NavComponent implements OnInit{
     this.userService.currentUserBehaviorSubject.subscribe((user)=>{
       this.currentUser = user;
     })
-    this.katakana.katakanaIt(document.querySelector('.title')?.innerHTML);
+    //this.katakana.katakanaIt(document.querySelector('.title')?.innerHTML, 1000);
   }
 
   isLoggedIn(){

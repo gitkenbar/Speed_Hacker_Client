@@ -52,6 +52,8 @@ export class AuthService {
   }
 
 
+  // ERROR HANDLING
+
   public handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'Incorrect Username or Password';  //'An unknown error occured!';
       if (!errorRes.error || !errorRes.error.error) {
