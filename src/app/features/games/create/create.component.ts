@@ -39,14 +39,10 @@ export class CreateComponent implements OnInit{
   }
 
   submit(){
-    // This sends U
-    let user_id!:object
-    if(this.currentUser){
-      user_id = {id : this.currentUser.id}
-    }
     let formValue = Object.values(this.gameForm.value);
-    let stringified = JSON.stringify(formValue);
-    this.contentService.createContent(stringified).subscribe({
+    let payload = {title: formValue.shift(), content: formValue}
+    console.log(payload)
+    this.gameService.makeGame(payload).subscribe({
       next: (res:any) =>{
         console.log(res)
       },

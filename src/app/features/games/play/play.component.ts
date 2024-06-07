@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ContentService } from '../../../core/services/content.service';
 import { Challenge } from '../../../shared/models/challenge';
@@ -19,7 +19,7 @@ import { ScoringService } from '../../../core/services/scoring.service';
   templateUrl: './play.component.html',
   styleUrl: './play.component.scss'
 })
-export class PlayComponent implements OnInit{
+export class PlayComponent implements OnInit, OnDestroy{
   @ViewChild(ContentComponent) contentCompent!:ContentComponent;
   @Output() challengeArray: string[] = []
   @Input("id") id: number = 0;
@@ -35,6 +35,7 @@ export class PlayComponent implements OnInit{
 
   countdown() {
     this.interval = setInterval(() => {
+      console.log(this.seconds)
       if (this.seconds > 0) {
         this.seconds--;
       } else if (this.minutes > 0 && this.seconds === 0) {
@@ -81,6 +82,10 @@ export class PlayComponent implements OnInit{
     });
 
     this.countdown()
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.interval)
   }
 
   get response() {

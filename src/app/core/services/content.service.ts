@@ -15,6 +15,7 @@ export class ContentService{
   ) { }
 
   createContent(content: any): Observable<any>{
+    console.log(content)
     return this.http.post<any>(`${environment.apiUrl}/contents/`, content)
   }
 
