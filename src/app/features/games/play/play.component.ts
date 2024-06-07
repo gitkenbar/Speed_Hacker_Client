@@ -35,7 +35,6 @@ export class PlayComponent implements OnInit, OnDestroy{
 
   countdown() {
     this.interval = setInterval(() => {
-      console.log(this.seconds)
       if (this.seconds > 0) {
         this.seconds--;
       } else if (this.minutes > 0 && this.seconds === 0) {
@@ -63,13 +62,17 @@ export class PlayComponent implements OnInit, OnDestroy{
     this.gameService.gameInfo(this.id).subscribe({
       next: (res: any) =>{
         this.gameData = res
+        this.getContent()
       },
       error: (error:any) => {
         console.error('error fetching game data',error);
       }
     });
 
-    this.contentService.getContents(this.id).subscribe({
+  }
+
+  getContent() {
+    this.contentService.getContents(this.gameData.content_id).subscribe({
       next: (res: any) =>{
         this.challenge = res
         this.challengeArray = JSON.parse(res.challenge)
@@ -79,8 +82,7 @@ export class PlayComponent implements OnInit, OnDestroy{
       error: (error:any) => {
         console.error('error fetching content', error);
       }
-    });
-
+      });
     this.countdown()
   }
 

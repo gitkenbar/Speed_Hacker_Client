@@ -22,6 +22,4 @@ export class ContentService{
   getContents(id: number): Observable<Challenge>{
     return this.http.get<any>(`${environment.apiUrl}/contents/${id}`)
   }
-
-
 }
