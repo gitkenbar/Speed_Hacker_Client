@@ -1,7 +1,8 @@
 <nav class="navbar">
   <div class="brand-name">
-    <h3 routerLink="" routerLinkActive="active" class="title" id="SpeedHacker" (mouseenter)="katakanaIt('Speed Hacker')">Speed Hacker</h3>
+    <h3 routerLink="" routerLinkActive="active" class="title" id="SpeedHacker" (mouseenter)="toggleTitleHover()">Speed Hacker</h3>
   </div>
+  <button (click)="fixit()">debug</button>
   <div class="nav-links">
     @if (isLoggedIn()){
       <a (click)="logout()">Logout</a>}

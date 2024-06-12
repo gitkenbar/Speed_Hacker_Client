@@ -14,6 +14,8 @@ import { KatakanaService } from '../../../core/services/katakana.service';
 })
 export class NavComponent implements OnInit{
   isSidebarVisible:boolean = false;
+  titleHover: boolean = false;
+  titleHolder!: HTMLElement
 
   currentUser: User | null = null;
 
@@ -27,7 +29,6 @@ export class NavComponent implements OnInit{
     this.userService.currentUserBehaviorSubject.subscribe((user)=>{
       this.currentUser = user;
     })
-    //this.katakana.katakanaIt(document.querySelector('.title')?.innerHTML, 1000);
   }
 
   isLoggedIn(){
@@ -48,15 +49,48 @@ export class NavComponent implements OnInit{
     this.isSidebarVisible = !this.isSidebarVisible
   }
 
-  katakanaIt(title: string){
-    let animationText = this.katakana.katakanaIt(title)
-    let newTitle = document.createElement("h3")
-    newTitle.innerHTML = animationText
-    newTitle.id = "newTitle"
+  katakanaIt(){
     let target: HTMLElement | null = document.getElementById("SpeedHacker");
-    let oldTitle = target?.innerText
-    target?.parentNode?.replaceChild(newTitle, target)
-    //newTitle?.parentNode?.replaceChildren(title, newTitle)
+    if(target){
+      this.titleHolder = target
+      for(let char of target.innerHTML){
+        let index = 0
+        index + 1;
+        if(index >= target.innerHTML.length){
+          index = 0
+        }
+      }
+     let animationText = this.katakana.katakanaIt(target?.innerHTML)
+     let newDiv = document.createElement("div")
+     let newTitle = document.createElement("h3")
+      newTitle.innerHTML = animationText;
+      newTitle.id = "newTitle";
+      // This isn't working!
+      // Debug button works though
+      newTitle.addEventListener("mouseleave", this.toggleTitleHover)
+
+
+      let oldTitle = target?.innerText
+      target?.parentNode?.replaceChild(newTitle, target)
+    }
+
   }
 
+  fixit(){
+    console.log("Fixin' it")
+    let newTitle: any = document.getElementById("newTitle")
+    let oldTitle = this.titleHolder
+    console.log(oldTitle)
+    newTitle?.parentNode?.replaceChild(oldTitle, newTitle)
+  }
+
+  toggleTitleHover(){
+    this.titleHover = !this.titleHover
+    console.log(this.titleHover)
+    if(this.titleHover){
+      this.katakanaIt()
+    } else {
+      this.fixit()
+    }
+  }
 }
