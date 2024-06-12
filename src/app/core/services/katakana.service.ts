@@ -13,13 +13,26 @@ export class KatakanaService {
   mixMatrix = this.katakana + this.latin + this.nums + this.symbols
 
   // Functions
-  katakanaIt(animated: string | undefined, speed: number){
-    console.log(animated)
-    console.log(speed)
-
-
+  katakanaIt(animated: string){
+    let newString: string = ''
     //this function will pull apart a string
-    //replace each piece with a random mixMatrix
+    for(let katakana of animated) {
+      let text = this.mixMatrix.charAt(Math.floor(Math.random() * this.mixMatrix.length))
+      //replace each piece with a random mixMatrix
+      newString += text
+    }
+    console.log(newString)
+
     //return the string to it's original state
+    return newString
+  }
+
+  katakanaRain(){
+    // this function will create a canvas
+
+    // then it will measure the width and set a size
+
+    // then it will loop over the
+
   }
 }
