@@ -47,4 +47,16 @@ export class NavComponent implements OnInit{
   toggleSidebar(){
     this.isSidebarVisible = !this.isSidebarVisible
   }
+
+  katakanaIt(title: string){
+    let animationText = this.katakana.katakanaIt(title)
+    let newTitle = document.createElement("h3")
+    newTitle.innerHTML = animationText
+    newTitle.id = "newTitle"
+    let target: HTMLElement | null = document.getElementById("SpeedHacker");
+    let oldTitle = target?.innerText
+    target?.parentNode?.replaceChild(newTitle, target)
+    //newTitle?.parentNode?.replaceChildren(title, newTitle)
+  }
+
 }

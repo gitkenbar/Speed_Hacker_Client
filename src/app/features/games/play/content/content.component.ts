@@ -63,8 +63,3 @@ export class ContentComponent implements OnInit{
     return (this.minutes * 60) + this.seconds
   }
 }
-
-
-//apr 27 interview
-
-//apr 29 - may 23 employer project
