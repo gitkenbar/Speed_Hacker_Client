@@ -21,12 +21,16 @@ export class KatakanaService {
       //replace each piece with a random mixMatrix
       newString += text
     }
-    console.log(newString)
+
 
     //return the string to it's original state
     return newString
   }
 
+  getKatakana(){
+    let newKatakana = this.mixMatrix.charAt(Math.floor(Math.random() * this.mixMatrix.length))
+    return newKatakana
+  }
   katakanaRain(){
     // this function will create a canvas
 
