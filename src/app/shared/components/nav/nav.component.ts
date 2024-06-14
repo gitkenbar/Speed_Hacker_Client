@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { User } from '../../models/user';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserService } from '../../../core/services/user.service';
 import { KatakanaService } from '../../../core/services/katakana.service';
+import { interval, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -12,8 +13,12 @@ import { KatakanaService } from '../../../core/services/katakana.service';
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss'
 })
+
 export class NavComponent implements OnInit{
   isSidebarVisible:boolean = false;
+  isTitleHover: boolean = false;
+  titleHolder!: string;
+  titleHoverText = signal("Speed Hacker")
 
   currentUser: User | null = null;
 
@@ -24,10 +29,15 @@ export class NavComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
+
+    // - This instantiates the user
     this.userService.currentUserBehaviorSubject.subscribe((user)=>{
       this.currentUser = user;
     })
-    //this.katakana.katakanaIt(document.querySelector('.title')?.innerHTML, 1000);
+    // - This grabs the page title and slaps it into the titleHolder attribute
+    this.titleHoverText.update((current)=>
+      this.titleHolder = current
+    )
   }
 
   isLoggedIn(){
@@ -39,12 +49,60 @@ export class NavComponent implements OnInit{
     if(this.isSidebarVisible){
       this.toggleSidebar();
     }
-
     this.authService.logout();
     this.userService.setCurrentUser(null);
   }
 
   toggleSidebar(){
     this.isSidebarVisible = !this.isSidebarVisible
+  }
+
+  katakanaStart(){
+    // - This Works!
+    // - This converts the Title text into random characters
+    this.titleHoverText.update((current)=>
+      this.katakana.katakanaIt(current)
+    )
+
+    /*
+    Experimental and Relic code for reference / future functionality
+
+    const katakanaInterval$ = interval(1000)
+
+    katakanaInterval$.pipe(
+      switchMap(
+
+    )
+
+    )
+       for(let char of this.titleHoverText){
+        let i = 0
+        let newChar = this.katakana.getKatakana()
+        console.log(newChar)
+        this.setCharAt(this.titleHoverText, i, newChar)
+        i++
+        if(i = target.innerText.length){
+          i = 0
+        }
+      } */
+  }
+
+  katakanaEnd(){
+    // This makes the page Title revert to it's original state
+    this.titleHoverText.update(() =>
+      this.titleHolder)
+  }
+
+  toggleTitleHover(){
+    this.isTitleHover = !this.isTitleHover
+    if(this.isTitleHover){
+      this.katakanaStart()
+      } else {
+        this.katakanaEnd()
+      }
+  }
+
+  setCharAt(str:string, i:number, char:string){
+    return str.substring(0, i) + char + str.substring(i+1)
   }
 }

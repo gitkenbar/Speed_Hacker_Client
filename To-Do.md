@@ -8,10 +8,11 @@
 
  Speed Hacker:
   -Make "Create" form more dynamically scalable
-  -Persist the user
+  -Katakana effect on hover + raining on login screen
   -Make "Play" UI more attractive/intuitive
   -Make "games" component paginate and look better
-  -Mobile view 
+  -Persist the user?
+  -Mobile view?
   -Host Speed Hacker
   -Add testing to Speed Hacker Client + API
  Work on Resume website
