@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,6 @@ export class KatakanaService {
       //replace each piece with a random mixMatrix
       newString += text
     }
-
-
     //return the string to it's original state
     return newString
   }
@@ -31,6 +30,15 @@ export class KatakanaService {
     let newKatakana = this.mixMatrix.charAt(Math.floor(Math.random() * this.mixMatrix.length))
     return newKatakana
   }
+
+  animationObs(data:any):Observable<string>{
+    const observable = new Observable<string>((subscriber) => {
+      
+    })
+
+    return observable
+  }
+
   katakanaRain(){
     // this function will create a canvas
 
