@@ -4,7 +4,8 @@ import { User } from '../../models/user';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserService } from '../../../core/services/user.service';
 import { KatakanaService } from '../../../core/services/katakana.service';
-import { interval, switchMap } from 'rxjs';
+import { Subscription, interval, switchMap } from 'rxjs';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 
 @Component({
   selector: 'app-nav',
@@ -19,6 +20,7 @@ export class NavComponent implements OnInit{
   isTitleHover: boolean = false;
   titleHolder!: string;
   titleHoverText = signal("Speed Hacker")
+  oneSec!: any;
 
   currentUser: User | null = null;
 
@@ -40,6 +42,9 @@ export class NavComponent implements OnInit{
     )
   }
 
+
+  // AUTH
+
   isLoggedIn(){
     //should be a behavior subject!
     return this.authService.isLoggedIn();
@@ -53,32 +58,19 @@ export class NavComponent implements OnInit{
     this.userService.setCurrentUser(null);
   }
 
+  // SIDEBAR
+
   toggleSidebar(){
     this.isSidebarVisible = !this.isSidebarVisible
   }
 
+  // KATAKANA
+
   katakanaStart(){
-    // - This Works!
     // - This converts the Title text into random characters
-    this.titleHoverText.update((current)=>
+     this.titleHoverText.update((current)=>
       this.katakana.katakanaIt(current)
     )
-
-    const katakanaInterval$ = interval(1000)
-
-    if(this.isTitleHover){
-        katakanaInterval$.pipe(
-
-        )
-      let i = 0
-      let newChar = this.katakana.getKatakana()
-      console.log(newChar)
-      this.setCharAt(this.titleHoverText(), i, newChar)
-      i++
-      if(i = this.titleHoverText().length){
-        i = 0
-      }
-    }
   }
 
   katakanaEnd(){
@@ -88,10 +80,14 @@ export class NavComponent implements OnInit{
   }
 
   toggleTitleHover(){
+    // Flips controller boolean
     this.isTitleHover = !this.isTitleHover
+
+    // Does different action based on boolean state
     if(this.isTitleHover){
-      this.katakanaStart()
+      this.oneSec = setInterval(() => {this.katakanaStart(), console.log("onesec Active")}, 1000)
       } else {
+        clearInterval(this.oneSec)
         this.katakanaEnd()
       }
   }
