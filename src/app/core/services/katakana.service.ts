@@ -11,15 +11,15 @@ export class KatakanaService {
   latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   nums = '0123456789';
   symbols = '!@#$%^&*()-=[];<>?/'
-  mixMatrix = this.katakana + this.latin + this.nums + this.symbols
+  charMix = this.katakana + this.latin + this.nums + this.symbols
 
   // Functions
   katakanaIt(animated: string){
     let newString: string = ''
     //this function will pull apart a string
     for(let katakana of animated) {
-      let text = this.mixMatrix.charAt(Math.floor(Math.random() * this.mixMatrix.length))
-      //replace each piece with a random mixMatrix
+      let text = this.charMix.charAt(Math.floor(Math.random() * this.charMix.length))
+      //replace each piece with a random charMix
       newString += text
     }
     //return the string to it's original state
@@ -27,13 +27,13 @@ export class KatakanaService {
   }
 
   getKatakana(){
-    let newKatakana = this.mixMatrix.charAt(Math.floor(Math.random() * this.mixMatrix.length))
-    return newKatakana
+    // This returns a random character from the charMix
+    return this.charMix.charAt(Math.floor(Math.random() * this.charMix.length))
   }
 
   animationObs(data:any):Observable<string>{
     const observable = new Observable<string>((subscriber) => {
-      
+
     })
 
     return observable
