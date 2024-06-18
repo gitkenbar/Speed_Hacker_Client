@@ -64,27 +64,21 @@ export class NavComponent implements OnInit{
       this.katakana.katakanaIt(current)
     )
 
-    /*
-    Experimental and Relic code for reference / future functionality
-
     const katakanaInterval$ = interval(1000)
 
-    katakanaInterval$.pipe(
-      switchMap(
+    while(this.isTitleHover){
+        katakanaInterval$.pipe(
 
-    )
-
-    )
-       for(let char of this.titleHoverText){
-        let i = 0
-        let newChar = this.katakana.getKatakana()
-        console.log(newChar)
-        this.setCharAt(this.titleHoverText, i, newChar)
-        i++
-        if(i = target.innerText.length){
-          i = 0
-        }
-      } */
+        )
+      let i = 0
+      let newChar = this.katakana.getKatakana()
+      console.log(newChar)
+      this.setCharAt(this.titleHoverText(), i, newChar)
+      i++
+      if(i = this.titleHoverText().length){
+        i = 0
+      }
+    }
   }
 
   katakanaEnd(){
