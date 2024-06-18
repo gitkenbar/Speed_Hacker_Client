@@ -66,7 +66,7 @@ export class NavComponent implements OnInit{
 
     const katakanaInterval$ = interval(1000)
 
-    while(this.isTitleHover){
+    if(this.isTitleHover){
         katakanaInterval$.pipe(
 
         )
