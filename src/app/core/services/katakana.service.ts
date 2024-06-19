@@ -22,7 +22,6 @@ export class KatakanaService {
       //replace each piece with a random charMix
       newString += text
     }
-    //return the string to it's original state
     return newString
   }
 
