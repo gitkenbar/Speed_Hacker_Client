@@ -68,8 +68,13 @@ export class NavComponent implements OnInit{
 
   katakanaStart(){
     // - This converts the Title text into random characters
-     this.titleHoverText.update((current)=>
-      this.katakana.katakanaIt(current)
+     this.titleHoverText.update( current =>
+      {let charIndex = Math.floor(Math.random() * current.length)
+        let newSymbol = this.katakana.getKatakana()
+        let modifiedTitle = this.setCharAt(current, charIndex, newSymbol)
+        return modifiedTitle
+      }
+      //this.katakana.katakanaIt(current)
     )
   }
 
@@ -85,7 +90,7 @@ export class NavComponent implements OnInit{
 
     // Does different action based on boolean state
     if(this.isTitleHover){
-      this.oneSec = setInterval(() => {this.katakanaStart(), console.log("onesec Active")}, 1000)
+      this.oneSec = setInterval(() => {this.katakanaStart()}, 500)
       } else {
         clearInterval(this.oneSec)
         this.katakanaEnd()
