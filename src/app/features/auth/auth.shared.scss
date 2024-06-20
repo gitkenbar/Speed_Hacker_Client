@@ -1,3 +1,4 @@
+
 .container{
   display: flex;
   justify-content: center;
@@ -66,7 +67,8 @@ button:disabled{
 
 #codeRain{
   position:absolute;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  top: 0;
+  left: 0;
+  overflow: hidden;
   z-index: -1;
 }

@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    // Initializes the canvas
     this.canvas = <HTMLCanvasElement>document.getElementById('codeRain');
     this.context = this.canvas.getContext('2d');
-    console.log(this.canvas)
-
+    // Sets the canvas size
     this.canvas.width = window.innerWidth
     this.canvas.height = window.innerHeight
-
+    // Starts the code rain effect
     this.makeItRain()
   }
   /* LOGIN */
