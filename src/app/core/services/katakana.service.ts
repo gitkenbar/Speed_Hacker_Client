@@ -13,7 +13,7 @@ export class KatakanaService {
   symbols = '!@#$%^&*()-=[];<>?/'
   charMix = this.katakana + this.latin + this.nums + this.symbols
 
-  // Functions
+  // Functions               
   katakanaIt(animated: string){
     let newString: string = ''
     //this function will pull apart a string

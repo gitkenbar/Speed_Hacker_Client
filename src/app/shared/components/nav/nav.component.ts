@@ -90,7 +90,7 @@ export class NavComponent implements OnInit{
 
     // Does different action based on boolean state
     if(this.isTitleHover){
-      this.oneSec = setInterval(() => {this.katakanaStart()}, 500)
+      this.oneSec = setInterval(() => {this.katakanaStart()}, 200)
       } else {
         clearInterval(this.oneSec)
         this.katakanaEnd()

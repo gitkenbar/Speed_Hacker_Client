@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container" id="holder">
+  <canvas id="codeRain"></canvas>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="form-group">
       <label for="username">Username:</label>
@@ -16,3 +17,4 @@
     <button type="submit" [disabled]="!loginForm.valid">Login</button>
   </form>
 </div>
+
