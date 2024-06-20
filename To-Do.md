@@ -8,7 +8,7 @@
 
  Speed Hacker:
   -Make "Create" form more dynamically scalable
-  -Katakana effect on hover + raining on login screen
+  -Login functionality in front of katakanaRain in login component
   -Make "Play" UI more attractive/intuitive
   -Make "games" component paginate and look better
   -Persist the user?
