@@ -3,7 +3,6 @@
   justify-content: center;
   min-height: calc(100vh - 44px);
   align-items: center;
-  background-color: #2B2B2B;
 }
 
 form{
@@ -63,4 +62,11 @@ button:hover{
 button:disabled{
   cursor: pointer;
   background-color: #1c4e26;
+}
+
+#codeRain{
+  position:absolute;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  z-index: -1;
 }
