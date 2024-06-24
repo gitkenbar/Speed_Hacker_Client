@@ -7,8 +7,11 @@
 // Talk to ALL THE EMPLOYERS
 
  Speed Hacker:
+
+  Create:
+    -Check that the inputs are unique in content sets 
   -Make "Create" form more dynamically scalable
-  -Make "games" component paginate and look better
+  -Make "games" component look better
   -Make "Play" UI more attractive/intuitive
   -Persist the user?
   -Mobile view?

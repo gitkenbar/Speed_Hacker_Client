@@ -1,21 +1,40 @@
 .base{
-  display: grid;
-  grid-template-columns: auto;
+  display: flex;
   gap: 1rem;
-  padding: 1rem;
   padding-right: 7rem;
   min-height: 90vh;
   color: #53DD6C;
   background-color: #0A090C;
+  justify-content: center;
 }
+
 
 .chunk{
   width: max-content;
   background-color: #1C211F;
-  padding: 1vh;
   margin: 1vh;
   border: 1px solid #53DD6C;
   border-radius: 5px;
   box-shadow: 2px 2px;
-  justify-content: space-around;
+}
+
+
+.pagination-controls{
+  display:flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pagination-controls button{
+  display: block;
+  padding: 1rem;
+  border-bottom: 1px solid #53DD6C;
+  color: #53DD6C;
+  background-color: #2B2B2B;
+  text-decoration: none;
+}
+
+.pagination-controls button:hover{
+  color: #2B2B2B;
+  background-color: #53DD6C;
 }

@@ -1,7 +1,17 @@
+<div class="pagination-controls">
+  <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages || 0">Next</button>
+
+</div>
 <div class="game-list base">
     <div class="main-column chunk">
       @for (game of games; track game.id){
-        <app-game [game]="game"></app-game>
+        <app-game [game]="game"/>
       }
     </div>
-</div>
+  </div>
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages || 0">Next</button>
+
+  </div>
