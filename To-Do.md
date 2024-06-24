@@ -7,10 +7,12 @@
 // Talk to ALL THE EMPLOYERS
 
  Speed Hacker:
+
+  Create:
+    -Check that the inputs are unique in content sets 
   -Make "Create" form more dynamically scalable
-  -Login functionality in front of katakanaRain in login component
+  -Make "games" component look better
   -Make "Play" UI more attractive/intuitive
-  -Make "games" component paginate and look better
   -Persist the user?
   -Mobile view?
   -Host Speed Hacker
