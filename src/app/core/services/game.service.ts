@@ -17,8 +17,8 @@ export class GameService {
     return this.http.post<Game>(`${environment.apiUrl}/games`, gameData)
   }
 
-  getGames(): Observable<Game[]>{
-    return this.http.get<Game[]>(`${environment.apiUrl}/games`)
+  getGames(page: number): Observable<Game[]>{
+    return this.http.get<Game[]>(`${environment.apiUrl}/games?page=${page}`)
   }
 
   myGames(id: number): Observable<Game[]>{
