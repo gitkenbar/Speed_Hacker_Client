@@ -29,5 +29,13 @@
 
 
   <button [disabled]="!gameForm.valid">Create!</button>
+  @if(this.isError){
+    <div class="error">
+      <h4>Something went wrong!</h4>
+      <p>Status: {{this.returnedError.status}} </p>
+      <p>Message:{{this.returnedError.statusText}}</p>
+      <p></p>
+    </div>
+  }
 </form>
 </div>

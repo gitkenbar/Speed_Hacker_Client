@@ -16,8 +16,10 @@ import { User } from '../../../shared/models/user';
   styleUrl: './create.component.scss'
 })
 export class CreateComponent implements OnInit{
-
+  isError: boolean = false;
+  returnedError!: any;
   currentUser!: User | null;
+
   gameForm: FormGroup = new FormGroup({
     gameName: new FormControl('', Validators.required),
     lineOne: new FormControl('', Validators.required),
@@ -48,7 +50,9 @@ export class CreateComponent implements OnInit{
       },
       error: (error:any) => {
         console.log("error", error)
-        //this.isError = true
-      }})
+        this.isError = true
+        this.returnedError = error
+      }
+    })
   }
 }

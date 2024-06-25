@@ -3,9 +3,15 @@
   justify-content: center;
   min-height: calc(100vh - 44px);
   align-items: center;
-  background-color: #2B2B2B;
 }
 
+.error{
+  display: block;
+  color: black;
+  background-color: red;
+  padding: .5rem;
+  border-radius: 8px;
+}
 
 form{
   max-width: 800px;
