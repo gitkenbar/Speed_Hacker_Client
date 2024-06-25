@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { GameService } from '../../../core/services/game.service';
 import { Game } from '../../../shared/models/game';
 import { ContentService } from '../../../core/services/content.service';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../shared/models/user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -16,20 +17,38 @@ import { User } from '../../../shared/models/user';
   styleUrl: './create.component.scss'
 })
 export class CreateComponent implements OnInit{
+  // Error Handling
   isError: boolean = false;
   returnedError!: any;
+  // User
   currentUser!: User | null;
 
-  gameForm: FormGroup = new FormGroup({
+  // Form
+  gameForm: FormGroup = this.formBuilder.group({
     gameName: new FormControl('', Validators.required),
-    lineOne: new FormControl('', Validators.required),
-    lineTwo: new FormControl('', Validators.required),
-    lineThree: new FormControl('', Validators.required),
-    lineFour: new FormControl('', Validators.required),
-    lineFive: new FormControl('', Validators.required)
+    content: this.formBuilder.array([this.formBuilder.control('')])
   })
 
+  contentSub!: Subscription;
+
+  get content() {
+    return this.gameForm.get("content") as FormArray;
+  }
+
+  validateContent(){
+    let lastContentControl = this.content.at(this.content.length - 1);
+
+    if (lastContentControl.valid && !lastContentControl.pristine) {
+      this.addContent();
+    }
+  }
+
+  addContent(){
+    this.content.push(this.formBuilder.control(''));
+  }
+
   constructor(
+    private formBuilder:FormBuilder,
     private contentService:ContentService,
     private gameService:GameService,
     private userService:UserService
@@ -38,6 +57,10 @@ export class CreateComponent implements OnInit{
   ngOnInit(){
     this.userService.currentUserBehaviorSubject.subscribe((user)=>{
       this.currentUser = user;})
+
+    this.contentSub = this.content.valueChanges.subscribe(()=> {
+      this.validateContent();
+    })
   }
 
   submit(){
