@@ -9,13 +9,13 @@
  Speed Hacker:
 
   Create:
+    -Make form more dynamically scalable
     -Check that the inputs are unique in content sets 
-  -Make "Create" form more dynamically scalable
-  -Make "games" component look better
+    
   -Make "Play" UI more attractive/intuitive
   -Persist the user?
-  -Mobile view?
+  -check Mobile view, rework?
   -Host Speed Hacker
   -Add testing to Speed Hacker Client + API
- Work on Resume website
+ Start a Resume website
  More Testing for Almanac Plant CLI
