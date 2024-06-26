@@ -32,7 +32,8 @@ export class CreateComponent implements OnInit{
   contentSub!: Subscription;
 
   get content() {
-    return this.gameForm.get("content") as FormArray;
+    let contentArray = this.gameForm.get("content") as FormArray;
+    return contentArray
   }
 
   validateContent(){
