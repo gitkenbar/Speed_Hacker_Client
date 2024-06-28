@@ -33,7 +33,6 @@ export class ListComponent implements OnInit{
   loadGames(page:number){
     this.gameService.getGames(page).subscribe({
       next: (res: any) =>{
-        console.log(res)
         this.games = res.games;
         this.currentPage = res.current_page;
         this.totalPages = res.total_pages;

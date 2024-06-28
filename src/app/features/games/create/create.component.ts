@@ -74,7 +74,6 @@ export class CreateComponent implements OnInit{
     // Selectors
     let titleValue = this.title.value
     let contentsValue = this.content.value
-    console.log(contentsValue)
     if(contentsValue[contentsValue.length - 1] == ''){
     contentsValue.pop()}
 
@@ -85,7 +84,6 @@ export class CreateComponent implements OnInit{
     this.gameService.makeGame(payload).subscribe({
       next: (res:any) =>{
         // Route to scoreboard
-        console.log(res)
         this.router.navigate([`/scores/${res.id}`])
       },
       error: (error:any) => {
