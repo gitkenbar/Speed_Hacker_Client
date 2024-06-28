@@ -45,7 +45,9 @@ export class ScoreboardComponent implements OnInit{
         console.error('error fetching game data',error);
       }
     });
-    this.animateNumber('newScore')
+    if(this.gameData){
+      this.animateNumber('newScore')
+    }
   }
 
   tryAgain(){
