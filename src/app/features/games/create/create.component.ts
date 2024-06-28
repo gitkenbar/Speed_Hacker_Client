@@ -26,10 +26,15 @@ export class CreateComponent implements OnInit{
   // Form
   gameForm: FormGroup = this.formBuilder.group({
     gameName: new FormControl('', Validators.required),
-    content: this.formBuilder.array([this.formBuilder.control('')])
+    content: this.formBuilder.array([this.formBuilder.control('', Validators.required)])
   })
 
   contentSub!: Subscription;
+
+  get title() {
+    let title = this.gameForm.get("gameName") as FormControl;
+    return title;
+  }
 
   get content() {
     let contentArray = this.gameForm.get("content") as FormArray;
@@ -65,8 +70,8 @@ export class CreateComponent implements OnInit{
   }
 
   submit(){
-    let formValue = Object.values(this.gameForm.value);
-    let payload = {title: formValue.shift(), content: formValue}
+    let formValue = Object.values(this.gameForm);
+    let payload = {title: this.title.value, content: this.content.value}
     console.log(payload)
     this.gameService.makeGame(payload).subscribe({
       next: (res:any) =>{
