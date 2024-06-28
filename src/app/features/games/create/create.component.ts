@@ -57,7 +57,8 @@ export class CreateComponent implements OnInit{
     private formBuilder:FormBuilder,
     private contentService:ContentService,
     private gameService:GameService,
-    private userService:UserService
+    private userService:UserService,
+    private router:Router
   ){}
 
   ngOnInit(){
@@ -71,22 +72,21 @@ export class CreateComponent implements OnInit{
 
   submit(){
     // Selectors
-    let title = this.title.value
+    let titleValue = this.title.value
     let contentsValue = this.content.value
     console.log(contentsValue)
     if(contentsValue[contentsValue.length - 1] == ''){
     contentsValue.pop()}
-    console.log(contentsValue)
 
     // Payload object builder
-    let payload = {title: this.title.value, content: contentsValue}
-    console.log(payload)
-
+    let payload = {title: titleValue, content: contentsValue}
 
     // Submit with Game Service
     this.gameService.makeGame(payload).subscribe({
       next: (res:any) =>{
+        // Route to scoreboard
         console.log(res)
+        this.router.navigate([`/scores/${res.id}`])
       },
       error: (error:any) => {
         console.log("error", error)
