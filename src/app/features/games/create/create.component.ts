@@ -70,9 +70,20 @@ export class CreateComponent implements OnInit{
   }
 
   submit(){
-    let formValue = Object.values(this.gameForm);
-    let payload = {title: this.title.value, content: this.content.value}
+    // Selectors
+    let title = this.title.value
+    let contentsValue = this.content.value
+    console.log(contentsValue)
+    if(contentsValue[contentsValue.length - 1] == ''){
+    contentsValue.pop()}
+    console.log(contentsValue)
+
+    // Payload object builder
+    let payload = {title: this.title.value, content: contentsValue}
     console.log(payload)
+
+
+    // Submit with Game Service
     this.gameService.makeGame(payload).subscribe({
       next: (res:any) =>{
         console.log(res)
