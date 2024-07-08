@@ -61,7 +61,7 @@ button:hover{
 }
 
 button:disabled{
-  cursor: pointer;
+  cursor: not-allowed;
   background-color: #1c4e26;
 }
 
@@ -71,4 +71,9 @@ button:disabled{
   left: 0;
   overflow: hidden;
   z-index: -1;
+}
+
+.fauxLink{
+  text-decoration: underline;
+  cursor: pointer;
 }

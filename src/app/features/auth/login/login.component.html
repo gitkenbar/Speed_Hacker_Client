@@ -1,5 +1,6 @@
 <div class="container" id="holder">
   <canvas id="codeRain"></canvas>
+  @if(isLogin){
   <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="form-group">
       <label for="username">Username:</label>
@@ -9,12 +10,42 @@
       <label for="password">Password:</label>
       <input type="password" formControlName="password">
     </div>
-
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
     @if(isError){
       <p>Login credentials invalid. Try again!</p>
     }
+    <p>Don't have an account? <span class="fauxLink" (click)="toggleForm()">Sign Up</span></p>
+    </form>
+  } @else {
+    <form [formGroup]="signupForm" (ngSubmit)="onSignUp()">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" formControlName="username">
+      </div>
+      @if(errors){
+        @if(errors.username) {
+          <p class="error"> Username {{errors.username}} </p>
+        }
 
-    <button type="submit" [disabled]="!loginForm.valid">Login</button>
-  </form>
+      }
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" formControlName="password">
+      </div>
+      <div class="form-group">
+        <label for="password_confirmation">Confirm Password:</label>
+        <input type="password_confirmation" formControlName="password_confirmation">
+      </div>
+      @if(errors){
+        @if (errors.password) {
+          <p class="error"> Password {{errors.password}} </p>
+        }
+      }
+      <button type="submit" [disabled]="!signupForm.valid">SignUp</button>
+      <p>Already have an account? <span class="fauxLink" (click)="toggleForm()">Log In</span></p>
+    </form>
+  }
+
+
 </div>
 
