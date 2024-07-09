@@ -7,7 +7,6 @@
       <a (click)="logout()">Logout</a>}
       @else{
         <a routerLink="/login">Login</a>
-        <a routerLink="/signup">Signup</a>
       }
       <div class="menu-container" [class.active]="isSidebarVisible">
         <button class="menu" (click)="toggleSidebar()">☰</button>
