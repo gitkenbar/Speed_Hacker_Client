@@ -34,19 +34,25 @@ input[disabled]{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  width: max-content;
 }
 .response{
-  width: max-content;
+  display:flex;
+  margin: 0;
+  width: 60vw;
   align-self: flex-end;
-  display: flex;
+  position: fixed;
+  bottom: 0;
   justify-content:center;
 }
-.grid-container {
+.response input{
+
+  width: 58vw;
 }
 
 .chunk{
   display: block;
-  width: max-content;
   background-color: #1C211F;
   padding: 1vh;
   margin: 2vh;
