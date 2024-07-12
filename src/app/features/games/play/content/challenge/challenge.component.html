@@ -1,21 +1,24 @@
-<div [formGroup]="form" class="grid-container" [id]="this.challengeName">
+<div [formGroup]="form"[id]="this.challengeName">
+  @if(!form.controls[this.instanceIndex].disabled){
   <div class="challenge chunk">
-    <!-- @if(!this.form.value[this.instanceIndex]){} -->
+
       {{instance}}
-    <!--  <a class="textAnimation">
+    <a>
       {{userResponse}}
-    </a> -->
+    </a>
   </div>
-  <div class="response chunk">
+
+  <div class="response chunk" [style.z-index]="(-instanceIndex)">
+
     <input type="text"
     [formControlName]="instanceIndex"
-    [maxlength]="instance.length"
+    
     (keyup)="test()"
-    [size]="instance.length"
     autocomplete="off"
     autofocus
     required
     [id]="instanceIndex">
 
   </div>
+  }
 </div>
