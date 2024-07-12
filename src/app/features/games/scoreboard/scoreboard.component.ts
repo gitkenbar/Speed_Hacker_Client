@@ -31,9 +31,14 @@ export class ScoreboardComponent implements OnInit{
 
   ngOnInit(): void {
     this.scoreService.getScores(this.game_id).subscribe({
-      next: (res: any) =>{
-        //console.log(res)
-        this.scoreArray = res
+      next: (scores: Score[]) =>{
+        this.scoreArray = scores
+        // This fills the scoreArray with blank scores if there aren't entries
+        if(scores.length < 10){
+          let blankRank = 10 - scores.length
+          for(let i = 0; i < blankRank; i++) {
+            this.scoreArray.push(new Score(0))}
+        }
       }
     })
     this.scorecard = this.scoringService.getScorecard()
