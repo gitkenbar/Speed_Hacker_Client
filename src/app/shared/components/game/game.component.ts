@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../models/user';
 import { GameService } from '../../../core/services/game.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './game.component.html',
   styleUrl: '../shared.shared.scss'
 })

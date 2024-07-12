@@ -5,7 +5,7 @@
       <div class="header-info-name">
       </div>
       @if(userInfo){<div class="header-user-name">Created by: {{userInfo.username}}</div>}
-      <div class="updated">Updated: {{game.updated_at}}</div>
+      <div class="updated">Updated: {{game.updated_at | date: 'short'}}</div>
     </div>
     <div class="right">
       <!--
