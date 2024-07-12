@@ -1,25 +1,20 @@
 .entry{
   margin: 1vh;
-  min-width: 300px;
-  max-width: 650px;
+  max-width: 42vw;
   align-items: center;
   border: 1px solid #53DD6C;
 }
 
 .header{
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
   background-color: #0A090C;
   border-bottom: 1px solid #2B2B2B;
 }
-.header-left img{
-  width: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
+
 
 .header-info-name{
   font-size: 1rem;
@@ -40,8 +35,6 @@
   color:#0A090C;
 }
 
-
-
 .right a{
   display: block;
   padding: 10px;
@@ -60,6 +53,7 @@
 
 .chunk{
   display: flex;
+  flex-wrap: wrap;
   background-color: #1C211F;
   padding: 1vh;
   margin: 1vh;
