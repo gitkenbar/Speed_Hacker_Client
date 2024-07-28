@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, signal } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Challenge } from '../../../../../shared/models/challenge';
 import { BehaviorSubject } from 'rxjs';
-import anime from 'animejs/lib/anime.es.js';
 import { ContentComponent } from '../content.component';
+import { KatakanaService } from '../../../../../core/services/katakana.service';
 
 @Component({
   selector: 'app-challenge',
@@ -23,10 +23,14 @@ export class ChallengeComponent implements OnInit{
   challengeName!:any;
   @Output() userInput = document.getElementsByClassName(this.instanceIndex as string)
 
-  challengeInstance!: HTMLElement| null
-  userResponse!:string;
+  challengeInstance!: HTMLElement| null;
 
-  constructor(private contentComponent: ContentComponent){}
+  userResponse = signal('');
+
+  constructor(
+    private contentComponent: ContentComponent,
+    private katakanaService: KatakanaService){}
+
   ngOnInit(): void{
     this.instanceIndex = this.challengeArray.indexOf(this.instance)
     this.challengeName = `challenge-${this.instanceIndex}`
@@ -42,7 +46,28 @@ export class ChallengeComponent implements OnInit{
    }
    //this.form.getRawValue()
    test(){
-    this.userResponse = this.form.value[this.instanceIndex]
+    // We want userResponse to instead be a string of random katanakana that is the same length
+    this.userResponse.update( current => {
+        let inputLength = this.form.value[this.instanceIndex].length
+        //return this.form.value[this.instanceIndex]
+        if( inputLength > current.length){
+
+          let newSymbol = this.katakanaService.getKatakana()
+          let modifiedInput = current + newSymbol
+          console.log(modifiedInput)
+          return modifiedInput
+        } else {
+          let backspace = current.substring(inputLength, -1)
+          return backspace
+        }
+
+      }
+
+
+
+    )
+
+    //this.form.value[this.instanceIndex]
 
     this.form.value[this.instanceIndex]
     if(this.instance.length == this.form.value[this.instanceIndex].length){
@@ -54,5 +79,9 @@ export class ChallengeComponent implements OnInit{
         this.contentComponent.score()
       }
       }
+  }
+
+  setCharAt(str:string, i:number, char:string){
+    return str.substring(0, i) + char + str.substring(i+1)
   }
 }

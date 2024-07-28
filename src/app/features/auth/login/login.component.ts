@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit{
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   })
+  isLogin: boolean = true;
   canvas!: HTMLCanvasElement
   context!: any
 
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit{
   columns!: number
 
   isError = false;
+  errors!: {username: [], password: []}
 
   constructor(
     private authService: AuthService,
@@ -39,6 +41,10 @@ export class LoginComponent implements OnInit{
     this.canvas.height = window.innerHeight
     // Starts the code rain effect
     this.makeItRain()
+  }
+
+  toggleForm() {
+    this.isLogin = !this.isLogin
   }
   /* LOGIN */
 
@@ -58,6 +64,31 @@ export class LoginComponent implements OnInit{
         }
     })
     }
+  }
+
+  /* SIGN UP */
+
+  signupForm: FormGroup = new FormGroup({
+    /*
+    Collect more info later
+    first_name: new FormControl(''),
+    last_name: new FormControl(''),
+    email: new FormControl(''), */
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    password_confirmation: new FormControl('', Validators.required),
+  })
+
+  onSignUp(){
+    const formValue = this.signupForm.value
+    this.authService.signup(formValue).subscribe({
+      next: (res:any)=>{
+        this.toggleForm()
+      },
+      error: (error:any) =>{
+        this.errors = error.error;
+      }
+    })
   }
 
   /* KATAKANA RAIN */

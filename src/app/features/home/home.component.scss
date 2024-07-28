@@ -42,5 +42,6 @@ a:hover{
 
 .row{
   display: grid;
-  grid-template-columns: 43vw 43vw;
+  grid-template-columns:
+    repeat(auto-fit, minmax(33vw, 1fr));
 }

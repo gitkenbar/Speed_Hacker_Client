@@ -69,7 +69,8 @@ export class NavComponent implements OnInit{
   katakanaStart(){
     // - This converts the Title text into random characters
      this.titleHoverText.update( current =>
-      {let charIndex = Math.floor(Math.random() * current.length)
+      {
+        let charIndex = Math.floor(Math.random() * current.length)
         let newSymbol = this.katakana.getKatakana()
         let modifiedTitle = this.setCharAt(current, charIndex, newSymbol)
         return modifiedTitle
