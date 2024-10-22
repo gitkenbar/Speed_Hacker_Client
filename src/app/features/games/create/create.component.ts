@@ -101,6 +101,7 @@ export class CreateComponent implements OnInit{
     let duplicate = []
     //for loop that checks value of each entry against every other entry
     let inputIndex = 0
+    let errorIndex!: number
     for(let i of inputArray){
       //remove i from inputArray
       let arrayCopy = inputArray
@@ -115,11 +116,35 @@ export class CreateComponent implements OnInit{
       }
     }
     if(duplicate[0]){
-      console.log(duplicate)
+      console.log("duplicate", duplicate[0])
       return false
     } else {
       console.log("NO DUPLICATES")
       return true
     }
+
+
+    /* duplicateChecker(inputArray: []): boolean{
+      const valueHolder = new Map<number, string>()
+      let totalItems = inputArray.length;
+      let duplicateItems:any = [];
+      //for loop that checks value of each entry against every other entry
+      let inputIndex = 0
+      for (let input of inputArray) {
+        valueHolder.set(inputIndex, input);
+        inputIndex++;
+        if(valueHolder.has(input)){
+          duplicateItems > input
+        }
+      }
+      console.log(valueHolder)
+
+      if(!duplicateItems[0]) {
+        return true
+      }
+        else {
+          return false
+        }
+    } */
   }
 }
