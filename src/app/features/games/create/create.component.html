@@ -4,17 +4,36 @@
     <label for="gameName">Game-name:</label>
     <input type="text" formControlName="gameName" >
   </div>
+  <div>
+    <label for="isFlashCard">Flash-Card?</label>
+    <input type="checkbox" (click)="toggleFlashCard()">
+
+  </div>
   <br>
+  <div class="flexer">
   <div formArrayName="content">
     <h4>Contents</h4>
   @for (input of content.controls; track $index){
     <div class="form-group">
-      <label for="{{$index}}">{{$index + 1}}</label>
+
+      @if(!isFlashCard){
+        <label for=`{{$index}}`>{{$index + 1}}</label>
+        }
       <input type="text" [formControlName]="$index">
     </div>
   }
 </div>
-
+  @if(isFlashCard){
+    <div formArrayName="definition">
+      <h4>Definitions</h4>
+      @for (input of definition.controls; track $index){
+        <div class="form-group">
+          <input type="text" [formControlName]="$index">
+        </div>
+      }
+    </div>
+  }
+  </div>
 
 
   <button [disabled]="!gameForm.valid">Create!</button>
@@ -26,5 +45,6 @@
       <p></p>
     </div>
   }
+
 </form>
 </div>

@@ -24,12 +24,17 @@ export class CreateComponent implements OnInit{
   currentUser!: User | null;
 
   // Form
+
+  // Da plan
+  // make 'content' the key, add another array to hold the 'values' and construct the key value pairs by matching the two arrays
   gameForm: FormGroup = this.formBuilder.group({
     gameName: new FormControl('', Validators.required),
-    content: this.formBuilder.array([this.formBuilder.control('', Validators.required)])
+    content: this.formBuilder.array([this.formBuilder.control('', Validators.required)]),
+    definition: this.formBuilder.array([this.formBuilder.control('', Validators.required)])
   })
-
+  isFlashCard:boolean = false;
   contentSub!: Subscription;
+  definitionSub!: Subscription;
 
   get title() {
     let title = this.gameForm.get("gameName") as FormControl;
@@ -41,6 +46,11 @@ export class CreateComponent implements OnInit{
     return contentArray
   }
 
+  get definition() {
+    let definitionArray = this.gameForm.get("definition") as FormArray;
+    return definitionArray
+  }
+
   validateContent(){
     let lastContentControl = this.content.at(this.content.length - 1);
 
@@ -49,8 +59,20 @@ export class CreateComponent implements OnInit{
     }
   }
 
+  validateDefinition(){
+    let lastDefinitionControl = this.definition.at(this.definition.length - 1);
+
+    if (lastDefinitionControl.valid && !lastDefinitionControl.pristine){
+      this.addDefinition();
+    }
+  }
+
   addContent(){
     this.content.push(this.formBuilder.control(''));
+  }
+
+  addDefinition() {
+    this.definition.push(this.formBuilder.control(''));
   }
 
   constructor(
@@ -67,6 +89,10 @@ export class CreateComponent implements OnInit{
 
     this.contentSub = this.content.valueChanges.subscribe(()=> {
       this.validateContent();
+    })
+
+    this.definitionSub = this.definition.valueChanges.subscribe(()=> {
+      this.validateDefinition()
     })
   }
 
@@ -92,5 +118,12 @@ export class CreateComponent implements OnInit{
         this.returnedError = error
       }
     })
+
+    if(this.isFlashCard){
+    }
+  }
+
+  toggleFlashCard() {
+    this.isFlashCard = !this.isFlashCard
   }
 }
