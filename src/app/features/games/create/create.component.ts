@@ -7,6 +7,7 @@ import { ContentService } from '../../../core/services/content.service';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../shared/models/user';
 import { Subscription } from 'rxjs';
+import { FlashcardService } from '../../../core/services/flashcard.service';
 
 @Component({
   selector: 'app-create',
@@ -77,7 +78,7 @@ export class CreateComponent implements OnInit{
 
   constructor(
     private formBuilder:FormBuilder,
-    private contentService:ContentService,
+    private flashCardService:FlashcardService,
     private gameService:GameService,
     private userService:UserService,
     private router:Router
@@ -100,17 +101,24 @@ export class CreateComponent implements OnInit{
     // Selectors
     let titleValue = this.title.value
     let contentsValue = this.content.value
+    let definitionValue!:any
+    if(this.isFlashCard){
+      definitionValue = this.definition.value
+    }
     if(contentsValue[contentsValue.length - 1] == ''){
     contentsValue.pop()}
 
     // Payload object builder
-    let payload = {title: titleValue, content: contentsValue}
+    let gamePayload = {title: titleValue, content: contentsValue}
+    let flashcardPayload = {title: titleValue, content: contentsValue, definition: definitionValue}
 
     // Submit with Game Service
-    this.gameService.makeGame(payload).subscribe({
+    this.gameService.makeGame(gamePayload).subscribe({
       next: (res:any) =>{
-        // Route to scoreboard
-        this.router.navigate([`/scores/${res.id}`])
+        // Route to scoreboard if it's just a challenge
+        if(!this.isFlashCard){
+          this.router.navigate([`/scores/${res.id}`])
+        }
       },
       error: (error:any) => {
         console.log("error", error)
@@ -120,6 +128,18 @@ export class CreateComponent implements OnInit{
     })
 
     if(this.isFlashCard){
+      this.flashCardService.makeFlashCard(flashcardPayload).subscribe({
+        next: (res:any) =>{
+          console.log(res)
+          //route to Flashcard
+          // TODO: Create flashcard component
+        },
+        error: (error:any) =>{
+          console.log("error", error)
+          this.isError = true
+          this.returnedError = error
+        }
+      })
     }
   }
 
