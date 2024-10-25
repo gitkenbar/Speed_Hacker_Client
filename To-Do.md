@@ -9,7 +9,6 @@
  Speed Hacker:
 
   Create:
-    -Make form more dynamically scalable
     -Check that the inputs are unique in content sets 
     
   -Make "Play" UI more attractive/intuitive

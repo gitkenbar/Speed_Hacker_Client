@@ -1,5 +1,5 @@
 .base{
-  padding: 8px 7% 0;
+  padding: 8px 0 0;
   color: #53DD6C;
   background-color: #0A090C;
 }
@@ -8,11 +8,12 @@
   display: flex;
   flex-direction: column;
   background-color: #1C211F;
-  padding: 1vh;
-  margin: 1vh;
   border: 1px solid #53DD6C;
   border-radius: 5px;
   box-shadow: 2px 2px;
+  max-width: 91vw;
+  padding: 1vh;
+  margin: 1vh;
 }
 
 
@@ -43,5 +44,5 @@ a:hover{
 .row{
   display: grid;
   grid-template-columns:
-    repeat(auto-fit, minmax(33vw, 1fr));
+    repeat(auto-fit, minmax(40rem, 1fr));
 }

@@ -7,11 +7,10 @@
   justify-content: center;
 }
 
-
 .chunk{
+  min-width: 90vw;
   width: max-content;
   background-color: #1C211F;
-  margin: 1vh;
   border: 1px solid #53DD6C;
   border-radius: 5px;
   box-shadow: 2px 2px;
