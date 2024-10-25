@@ -4,7 +4,9 @@
   min-height: calc(100vh - 44px);
   align-items: center;
 }
-
+.flexer{
+  display: flex;
+}
 .error{
   display: block;
   color: black;

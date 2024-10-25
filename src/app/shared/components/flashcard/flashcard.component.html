@@ -1,0 +1,19 @@
+<div class="entry">
+  <div class="header">
+    <div class="header-left">
+      {{card.name}}
+      <div class="header-info-name">
+      </div>
+      @if(userInfo){<div class="header-user-name">Created by: {{userInfo.username}}</div>}
+      <div class="updated">Updated: {{card.updated_at | date: 'short'}}</div>
+    </div>
+    <div class="right">
+      <!--
+        @if(userInfo.id == currentUser.id){
+          <a class="deleteEntry">Delete</a>
+        }
+       -->
+      <a (click)="getCards(card.id)">Study!</a>
+    </div>
+  </div>
+</div>

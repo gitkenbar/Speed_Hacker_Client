@@ -6,7 +6,10 @@ import { Game } from '../../../shared/models/game';
 import { ContentService } from '../../../core/services/content.service';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../shared/models/user';
-import { findIndex, Subscription } from 'rxjs';
+
+import { Subscription } from 'rxjs';
+import { FlashcardService } from '../../../core/services/flashcard.service';
+
 
 @Component({
   selector: 'app-create',
@@ -24,12 +27,17 @@ export class CreateComponent implements OnInit{
   currentUser!: User | null;
 
   // Form
+
+  // Da plan
+  // make 'content' the key, add another array to hold the 'values' and construct the key value pairs by matching the two arrays
   gameForm: FormGroup = this.formBuilder.group({
     gameName: new FormControl('', Validators.required),
-    content: this.formBuilder.array([this.formBuilder.control('', Validators.required)])
+    content: this.formBuilder.array([this.formBuilder.control('', Validators.required)]),
+    definition: this.formBuilder.array([this.formBuilder.control('', Validators.required)])
   })
-
+  isFlashCard:boolean = false;
   contentSub!: Subscription;
+  definitionSub!: Subscription;
 
   get title() {
     let title = this.gameForm.get("gameName") as FormControl;
@@ -39,6 +47,11 @@ export class CreateComponent implements OnInit{
   get content() {
     let contentArray = this.gameForm.get("content") as FormArray;
     return contentArray
+  }
+
+  get definition() {
+    let definitionArray = this.gameForm.get("definition") as FormArray;
+    return definitionArray
   }
 
   validateContent(){
@@ -52,13 +65,25 @@ export class CreateComponent implements OnInit{
     }
   }
 
+  validateDefinition(){
+    let lastDefinitionControl = this.definition.at(this.definition.length - 1);
+
+    if (lastDefinitionControl.valid && !lastDefinitionControl.pristine){
+      this.addDefinition();
+    }
+  }
+
   addContent(){
     this.content.push(this.formBuilder.control(''));
   }
 
+  addDefinition() {
+    this.definition.push(this.formBuilder.control(''));
+  }
+
   constructor(
     private formBuilder:FormBuilder,
-    private contentService:ContentService,
+    private flashCardService:FlashcardService,
     private gameService:GameService,
     private userService:UserService,
     private router:Router
@@ -71,23 +96,48 @@ export class CreateComponent implements OnInit{
     this.contentSub = this.content.valueChanges.subscribe(()=> {
       this.validateContent();
     })
+
+    this.definitionSub = this.definition.valueChanges.subscribe(()=> {
+      this.validateDefinition()
+    })
   }
 
   submit(){
     // Selectors
     let titleValue = this.title.value
     let contentsValue = this.content.value
+    let definitionValue!:any
+    if(this.isFlashCard){
+      definitionValue = this.definition.value
+    }
     if(contentsValue[contentsValue.length - 1] == ''){
     contentsValue.pop()}
 
     // Payload object builder
-    let payload = {title: titleValue, content: contentsValue}
+    let gamePayload = {title: titleValue, content: contentsValue}
+    let contentId!:number
+    let flashcardPayload = {title: titleValue, content: contentsValue, definition: definitionValue}
 
     // Submit with Game Service
-    this.gameService.makeGame(payload).subscribe({
+    this.gameService.makeGame(gamePayload).subscribe({
       next: (res:any) =>{
-        // Route to scoreboard
-        this.router.navigate([`/scores/${res.id}`])
+        // Route to scoreboard if it's just a challenge
+        if(!this.isFlashCard){
+          this.router.navigate([`/scores/${res.id}`])
+        }else{
+          this.flashCardService.makeFlashCard(flashcardPayload).subscribe({
+            next: (res:any) =>{
+              console.log(res)
+              //route to Flashcard
+              // TODO: Create flashcard component
+            },
+            error: (error:any) =>{
+              console.log("error", error)
+              this.isError = true
+              this.returnedError = error
+            }
+          })
+        }
       },
       error: (error:any) => {
         console.log("error", error)
@@ -96,6 +146,10 @@ export class CreateComponent implements OnInit{
       }
     })
   }
+
+
+  toggleFlashCard() {
+    this.isFlashCard = !this.isFlashCard
 
   duplicateChecker(inputArray: []): boolean{
     let duplicate = []
@@ -146,5 +200,6 @@ export class CreateComponent implements OnInit{
           return false
         }
     } */
+
   }
 }
