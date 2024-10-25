@@ -1,0 +1,38 @@
+.base{
+  display: flex;
+  gap: 1rem;
+  min-height: 90vh;
+  color: #53DD6C;
+  background-color: #0A090C;
+  justify-content: center;
+}
+
+
+.chunk{
+  width: max-content;
+  background-color: #1C211F;
+  margin: 1vh;
+  border: 1px solid #53DD6C;
+  border-radius: 5px;
+  box-shadow: 2px 2px;
+}
+
+
+.pagination-controls{
+  display:flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pagination-controls button{
+  display: block;
+  padding: 1rem;
+  color: #53DD6C;
+  background-color: #2B2B2B;
+  text-decoration: none;
+}
+
+.pagination-controls button:hover{
+  color: #2B2B2B;
+  background-color: #53DD6C;
+}
