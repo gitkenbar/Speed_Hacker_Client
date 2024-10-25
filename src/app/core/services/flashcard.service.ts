@@ -18,4 +18,8 @@ export class FlashcardService {
   getFlashCard(page: number): Observable<FlashCard[]>{
     return this.http.get<FlashCard[]>(`${environment.apiUrl}/flashcards?page=${page}`)
   }
+
+  flashCardInfo(id:number): Observable<FlashCard>{
+    return this.http.get<FlashCard>(`${environment.apiUrl}/flashcards/${id}`)
+  }
 }
