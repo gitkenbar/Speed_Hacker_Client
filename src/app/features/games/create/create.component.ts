@@ -110,6 +110,7 @@ export class CreateComponent implements OnInit{
 
     // Payload object builder
     let gamePayload = {title: titleValue, content: contentsValue}
+    let contentId!:number
     let flashcardPayload = {title: titleValue, content: contentsValue, definition: definitionValue}
 
     // Submit with Game Service
@@ -118,6 +119,19 @@ export class CreateComponent implements OnInit{
         // Route to scoreboard if it's just a challenge
         if(!this.isFlashCard){
           this.router.navigate([`/scores/${res.id}`])
+        }else{
+          this.flashCardService.makeFlashCard(flashcardPayload).subscribe({
+            next: (res:any) =>{
+              console.log(res)
+              //route to Flashcard
+              // TODO: Create flashcard component
+            },
+            error: (error:any) =>{
+              console.log("error", error)
+              this.isError = true
+              this.returnedError = error
+            }
+          })
         }
       },
       error: (error:any) => {
@@ -126,21 +140,6 @@ export class CreateComponent implements OnInit{
         this.returnedError = error
       }
     })
-
-    if(this.isFlashCard){
-      this.flashCardService.makeFlashCard(flashcardPayload).subscribe({
-        next: (res:any) =>{
-          console.log(res)
-          //route to Flashcard
-          // TODO: Create flashcard component
-        },
-        error: (error:any) =>{
-          console.log("error", error)
-          this.isError = true
-          this.returnedError = error
-        }
-      })
-    }
   }
 
   toggleFlashCard() {
