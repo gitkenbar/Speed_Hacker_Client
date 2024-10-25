@@ -15,6 +15,14 @@ export const routes: Routes = [
     loadComponent: ()=> import("./features/games/list/list.component").then((c) => c.ListComponent)
   },
   {
+    path: 'quickcards',
+    loadComponent: ()=> import("./features/cards/cardlist/cardlist.component").then((c) => c.CardlistComponent)
+  },
+  {
+    path: 'cards/:id',
+    loadComponent: ()=> import("./features/cards/study/study.component").then((c)=> c.StudyComponent)
+  },
+  {
     path: 'create',
     loadComponent: ()=> import("./features/games/create/create.component").then((c) => c.CreateComponent)
   },
